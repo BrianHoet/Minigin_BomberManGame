@@ -11,6 +11,11 @@ namespace dae
 		m_pOwner = owner;
 	}
 
+	glm::vec2 TextureComponent::GetSize()
+	{
+		return m_Texture->GetSize();
+	}
+
 	void TextureComponent::Update(float)
 	{
 	}

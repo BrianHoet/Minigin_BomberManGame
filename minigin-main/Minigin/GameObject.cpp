@@ -12,6 +12,11 @@ namespace dae
 		{
 			pComponent->Update(deltaTime);
 		}
+
+		for (auto child : m_pChildren)
+		{
+			child->Update(deltaTime);
+		}
 	}
 
 	void GameObject::FixedUpdate(float deltaTime)
@@ -20,6 +25,11 @@ namespace dae
 		{
 			pComponent->FixedUpdate(deltaTime);
 		}
+
+		for (auto child : m_pChildren)
+		{
+			child->FixedUpdate(deltaTime);
+		}
 	}
 
 	void GameObject::Render() const
@@ -27,6 +37,11 @@ namespace dae
 		for (const auto& pComponent : m_pComponents)
 		{
 			pComponent->Render();
+		}
+
+		for(auto child : m_pChildren)
+		{
+			child->Render();
 		}
 	}
 

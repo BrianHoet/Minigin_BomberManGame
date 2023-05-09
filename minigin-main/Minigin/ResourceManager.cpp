@@ -5,6 +5,9 @@
 #include "Renderer.h"
 #include "Texture2D.h"
 #include "Font.h"
+#include <iostream>
+#include <fstream>
+#include <sstream>
 
 void dae::ResourceManager::Init(const std::string& dataPath)
 {
@@ -30,4 +33,42 @@ std::shared_ptr<dae::Texture2D> dae::ResourceManager::LoadTexture(const std::str
 std::shared_ptr<dae::Font> dae::ResourceManager::LoadFont(const std::string& file, unsigned int size) const
 {
 	return std::make_shared<Font>(m_dataPath + file, size);
+}
+
+std::vector<int> dae::ResourceManager::ParseMapTxt(const std::string& file) const
+{
+    std::vector<int> result;
+
+    // Open the file for reading
+    std::ifstream fileParsing(file);
+    if (!fileParsing.is_open())
+    {
+        // Handle error
+
+        return result;
+    }
+
+    // Read each line of the file
+    std::string line;
+    while (std::getline(fileParsing, line))
+    {
+        // Parse the line into integers
+        std::stringstream ss(line);
+        std::string field;
+        while (std::getline(ss, field, ','))
+        {
+            try
+            {
+                result.push_back(std::stoi(field));
+            }
+            catch (std::invalid_argument&)
+            {
+                // Handle invalid data
+                std::cout << "Invalid data in file\n";
+            }
+        }
+    }
+
+
+    return result;
 }

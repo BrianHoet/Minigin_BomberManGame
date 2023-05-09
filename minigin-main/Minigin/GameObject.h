@@ -10,7 +10,7 @@ namespace dae
 {
 	class BaseComponent;
 
-	class GameObject final
+	class GameObject
 	{
 	public:
 		void Update(float deltaTime);

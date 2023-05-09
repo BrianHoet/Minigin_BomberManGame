@@ -20,11 +20,13 @@
 #include "RotationComponent.h"
 #include "Commands.h"
 #include "Counter.h"
+#include "InputManager.h"
 #include "UIComponent.h"
 #include "Observer.h"
+#include "Level.h"
 
-/*
-void ControllerInit(dae::Scene& scene, dae::GameObject* parent)
+
+void ControllerInit(dae::Scene& scene /*, dae::GameObject* parent*/)
 {
 	const float speed{ 100.f };
 	//Player 1
@@ -40,55 +42,55 @@ void ControllerInit(dae::Scene& scene, dae::GameObject* parent)
 		TextureCpBomberman->SetTexture("BomberMan_Running.png");
 		GameObjBomberManTex->AddComponent(TextureCpBomberman);
 
-		//MoveCommand* moveCommandUp = new MoveCommand{ GameObjBomberManTex.get(), up };
-		//MoveCommand* moveCommandDown = new MoveCommand{ GameObjBomberManTex.get(), down };
-		//MoveCommand* moveCommandLeft = new MoveCommand{ GameObjBomberManTex.get(), left };
-		//MoveCommand* moveCommandRight = new MoveCommand{ GameObjBomberManTex.get(), right };
+		dae::MoveCommand* moveCommandUp = new dae::MoveCommand{ GameObjBomberManTex.get(), up };
+		dae::MoveCommand* moveCommandDown = new dae::MoveCommand{ GameObjBomberManTex.get(), down };
+		dae::MoveCommand* moveCommandLeft = new dae::MoveCommand{ GameObjBomberManTex.get(), left };
+		dae::MoveCommand* moveCommandRight = new dae::MoveCommand{ GameObjBomberManTex.get(), right };
+		
+		dae::InputManager::GetInstance().BindKeyToCommand(SDL_SCANCODE_W, moveCommandUp);
+		dae::InputManager::GetInstance().BindKeyToCommand(SDL_SCANCODE_S, moveCommandDown);
+		dae::InputManager::GetInstance().BindKeyToCommand(SDL_SCANCODE_A, moveCommandLeft);
+		dae::InputManager::GetInstance().BindKeyToCommand(SDL_SCANCODE_D, moveCommandRight);
+		
+		
+		auto pHealth = std::make_shared<dae::HealthComponent>(GameObjBomberManTex.get(), 3);
+		GameObjBomberManTex->AddComponent(pHealth);
+		
+		auto pPoints = std::make_shared<dae::PointsComponent>(GameObjBomberManTex.get(), 0);
+		GameObjBomberManTex->AddComponent(pPoints);
+		
+		dae::HealthCommand* dieCommand = new dae::HealthCommand{ GameObjBomberManTex.get() };
+		dae::InputManager::GetInstance().BindKeyToCommand(SDL_SCANCODE_O, dieCommand);
+		dae::PointCommand* pointCommand = new dae::PointCommand{ GameObjBomberManTex.get() };
+		dae::InputManager::GetInstance().BindKeyToCommand(SDL_SCANCODE_P, pointCommand);
+		
+		auto pUIObserver = std::make_shared<dae::UI>();
+		GameObjBomberManTex->MakeObserver(pUIObserver);
+		
+		//parent->AddChild(GameObjBomberManTex.get());
 		//
-		//dae::InputManager::GetInstance().BindKeyToCommand(SDL_SCANCODE_W, moveCommandUp);
-		//dae::InputManager::GetInstance().BindKeyToCommand(SDL_SCANCODE_S, moveCommandDown);
-		//dae::InputManager::GetInstance().BindKeyToCommand(SDL_SCANCODE_A, moveCommandLeft);
-		//dae::InputManager::GetInstance().BindKeyToCommand(SDL_SCANCODE_D, moveCommandRight);
-
-
-		//auto pHealth = std::make_shared<dae::HealthComponent>(GameObjBomberManTex.get(), 3);
-		//GameObjBomberManTex->AddComponent(pHealth);
-
-		//auto pPoints = std::make_shared<dae::PointsComponent>(GameObjBomberManTex.get(), 0);
-		//GameObjBomberManTex->AddComponent(pPoints);
-
-		//HealthCommand* dieCommand = new HealthCommand{ GameObjBomberManTex.get() };
-		//dae::InputManager::GetInstance().BindKeyToCommand(SDL_SCANCODE_O, dieCommand);
-		//PointCommand* pointCommand = new PointCommand{ GameObjBomberManTex.get() };
-		//dae::InputManager::GetInstance().BindKeyToCommand(SDL_SCANCODE_P, pointCommand);
-
-		//auto pUIObserver = std::make_shared<UI>();
-		//GameObjBomberManTex->MakeObserver(pUIObserver);
-
-		parent->AddChild(GameObjBomberManTex.get());
-
 		scene.Add(GameObjBomberManTex);
-
-		//Lives Display
+		//
+		////Lives Display
 		//auto BomberManLivesObj = std::make_shared<dae::GameObject>("BomberMan");
 		//auto fontUI = dae::ResourceManager::GetInstance().LoadFont("Lingua.otf", 15);
 		//auto textBomberManLives = std::make_shared<dae::UIComponent>(fontUI, "Lives: ",
 		//	"Lives", BomberManLivesObj.get());
 		//BomberManLivesObj->SetRelativePosition({ 5, 310, 0 });
 		//BomberManLivesObj->AddComponent(textBomberManLives);
-		//parent->AddChild(BomberManLivesObj.get());
+		////parent->AddChild(BomberManLivesObj.get());
 		//scene.Add(BomberManLivesObj);
-
-		//Points Display
+		//
+		////Points Display
 		//auto BomberManPointsObj = std::make_shared<dae::GameObject>("BomberMan");
 		//auto textBluePoints = std::make_shared<dae::UIComponent>(fontUI, "Points: ",
 		//	"Points", BomberManPointsObj.get());
 		//BomberManPointsObj->SetRelativePosition({ 5, 330, 0 });
 		//BomberManPointsObj->AddComponent(textBluePoints);
-		//parent->AddChild(BomberManPointsObj.get());
+		////parent->AddChild(BomberManPointsObj.get());
 		//scene.Add(BomberManPointsObj);
-
-		//GameObjBomberManTex->NotifyObservers(Update);
+		
+		//GameObjBomberManTex->NotifyObservers(dae::Update);
 	}
 	/*
 	//Player 2
@@ -106,68 +108,68 @@ void ControllerInit(dae::Scene& scene, dae::GameObject* parent)
 		TextureCpBallon->SetTexture("BomberMan_Ballon.png");
 		GameObjBallonTex->AddComponent(TextureCpBallon);
 
-		MoveCommand* moveCommandUpBallon = new MoveCommand{ GameObjBallonTex.get(), upBallon };
-		MoveCommand* moveCommandDownBallon = new MoveCommand{ GameObjBallonTex.get(), downBallon };
-		MoveCommand* moveCommandLeftBallon = new MoveCommand{ GameObjBallonTex.get(), leftBallon };
-		MoveCommand* moveCommandRightBallon = new MoveCommand{ GameObjBallonTex.get(), rightBallon };
+		dae::MoveCommand* moveCommandUpBallon = new dae::MoveCommand{ GameObjBallonTex.get(), upBallon };
+		dae::MoveCommand* moveCommandDownBallon = new dae::MoveCommand{ GameObjBallonTex.get(), downBallon };
+		dae::MoveCommand* moveCommandLeftBallon = new dae::MoveCommand{ GameObjBallonTex.get(), leftBallon };
+		dae::MoveCommand* moveCommandRightBallon = new dae::MoveCommand{ GameObjBallonTex.get(), rightBallon };
 
 		int controller1Index{ 0 };
 		dae::InputManager::GetInstance().AddController(controller1Index);
 
-		Controller::ControllerButton controllerButton{};
+		dae::Controller::ControllerButton controllerButton{};
 
-		controllerButton = Controller::ControllerButton::DpadUp;
+		controllerButton = dae::Controller::ControllerButton::DpadUp;
 		dae::InputManager::GetInstance().BindControllerToCommand(controller1Index, controllerButton, moveCommandUpBallon);
-		controllerButton = Controller::ControllerButton::DpadDown;
+		controllerButton = dae::Controller::ControllerButton::DpadDown;
 		dae::InputManager::GetInstance().BindControllerToCommand(controller1Index, controllerButton, moveCommandDownBallon);
-		controllerButton = Controller::ControllerButton::DpadLeft;
+		controllerButton = dae::Controller::ControllerButton::DpadLeft;
 		dae::InputManager::GetInstance().BindControllerToCommand(controller1Index, controllerButton, moveCommandLeftBallon);
-		controllerButton = Controller::ControllerButton::DpadRight;
+		controllerButton = dae::Controller::ControllerButton::DpadRight;
 		dae::InputManager::GetInstance().BindControllerToCommand(controller1Index, controllerButton, moveCommandRightBallon);
 		scene.Add(GameObjBallonTex);
 
-		//auto pHealth = std::make_shared<dae::HealthComponent>(GameObjBallonTex.get(), 1);
-		//GameObjBallonTex->AddComponent(pHealth);
-		//
-		//auto pPoints = std::make_shared<dae::PointsComponent>(GameObjBallonTex.get(), 0);
-		//GameObjBallonTex->AddComponent(pPoints);
-		//
-		//HealthCommand* dieCommandRed = new HealthCommand{ GameObjBallonTex.get() };
-		//controllerButton = Controller::ControllerButton::ButtonY;
-		//dae::InputManager::GetInstance().BindControllerToCommand(controller1Index, controllerButton, dieCommandRed);
-		//PointCommand* pointCommandRed = new PointCommand{ GameObjBallonTex.get() };
-		//controllerButton = Controller::ControllerButton::ButtonA;
-		//dae::InputManager::GetInstance().BindControllerToCommand(controller1Index, controllerButton, pointCommandRed);
-		//
-		//auto pUIObserver = std::make_shared<UI>();
-		//GameObjBallonTex->MakeObserver(pUIObserver);
+		auto pHealth = std::make_shared<dae::HealthComponent>(GameObjBallonTex.get(), 1);
+		GameObjBallonTex->AddComponent(pHealth);
+		
+		auto pPoints = std::make_shared<dae::PointsComponent>(GameObjBallonTex.get(), 0);
+		GameObjBallonTex->AddComponent(pPoints);
+
+		dae::HealthCommand* dieCommandRed = new dae::HealthCommand{ GameObjBallonTex.get() };
+		controllerButton = dae::Controller::ControllerButton::ButtonY;
+		dae::InputManager::GetInstance().BindControllerToCommand(controller1Index, controllerButton, dieCommandRed);
+		dae::PointCommand* pointCommandRed = new dae::PointCommand{ GameObjBallonTex.get() };
+		controllerButton = dae::Controller::ControllerButton::ButtonA;
+		dae::InputManager::GetInstance().BindControllerToCommand(controller1Index, controllerButton, pointCommandRed);
+		
+		auto pUIObserver = std::make_shared<dae::UI>();
+		GameObjBallonTex->MakeObserver(pUIObserver);
 
 		parent->AddChild(GameObjBallonTex.get());
 
 		//Lives Display
-		//auto BallonLivesObj = std::make_shared<dae::GameObject>("Ballon");
-		//auto fontUI = dae::ResourceManager::GetInstance().LoadFont("Lingua.otf", 15);
-		//auto textBomberManLives = std::make_shared<dae::UIComponent>(fontUI, "Lives: ",
-		//	"Lives", BallonLivesObj.get());
-		//BallonLivesObj->SetRelativePosition({ 5, 410, 0 });
-		//BallonLivesObj->AddComponent(textBomberManLives);
-		//parent->AddChild(BallonLivesObj.get());
-		//scene.Add(BallonLivesObj);
-		//
-		////Points Display
-		//auto BallonPointsObj = std::make_shared<dae::GameObject>("Ballon");
-		//auto textBluePoints = std::make_shared<dae::UIComponent>(fontUI, "Points: ",
-		//	"Points", BallonPointsObj.get());
-		//BallonPointsObj->SetRelativePosition({ 5, 430, 0 });
-		//BallonPointsObj->AddComponent(textBluePoints);
-		//parent->AddChild(BallonPointsObj.get());
-		//scene.Add(BallonPointsObj);
+		auto BallonLivesObj = std::make_shared<dae::GameObject>("Ballon");
+		auto fontUI = dae::ResourceManager::GetInstance().LoadFont("Lingua.otf", 15);
+		auto textBomberManLives = std::make_shared<dae::UIComponent>(fontUI, "Lives: ",
+			"Lives", BallonLivesObj.get());
+		BallonLivesObj->SetRelativePosition({ 5, 410, 0 });
+		BallonLivesObj->AddComponent(textBomberManLives);
+		parent->AddChild(BallonLivesObj.get());
+		scene.Add(BallonLivesObj);
+		
+		//Points Display
+		auto BallonPointsObj = std::make_shared<dae::GameObject>("Ballon");
+		auto textBluePoints = std::make_shared<dae::UIComponent>(fontUI, "Points: ",
+			"Points", BallonPointsObj.get());
+		BallonPointsObj->SetRelativePosition({ 5, 430, 0 });
+		BallonPointsObj->AddComponent(textBluePoints);
+		parent->AddChild(BallonPointsObj.get());
+		scene.Add(BallonPointsObj);
 
-		//GameObjBallonTex->NotifyObservers(Update);
+		//GameObjBallonTex->NotifyObservers(dae::Update);
 	}
-	
+	*/
 }
-*/
+
 
 void load()
 {
@@ -182,12 +184,13 @@ void load()
 	
 	auto& scene = dae::SceneManager::GetInstance().CreateScene("Demo");
 
-	auto GameObjBackGround = std::make_shared<dae::GameObject>();
-	auto go = std::make_shared<dae::TextureComponent>(GameObjBackGround.get());
-	go->SetTexture("background.tga");	GameObjBackGround->SetRelativePosition(GameObjBackGround->GetWorldPosition());
-	GameObjBackGround->AddComponent(go);
-	scene.Add(GameObjBackGround);
+	//auto GameObjBackGround = std::make_shared<dae::GameObject>();
+	//auto go = std::make_shared<dae::TextureComponent>(GameObjBackGround.get());
+	//go->SetTexture("background.tga");	GameObjBackGround->SetRelativePosition(GameObjBackGround->GetWorldPosition());
+	//GameObjBackGround->AddComponent(go);
+	//scene.Add(GameObjBackGround);
 
+	/*
 	auto GameObjLogo = std::make_shared<dae::GameObject>();
 	auto go2 = std::make_shared<dae::TextureComponent>(GameObjLogo.get());
 	go2->SetTexture("logo.tga");
@@ -209,15 +212,22 @@ void load()
 	GameObjFps->SetRelativePosition(glm::vec3{ 0, 0 ,0 });
 	GameObjFps->AddComponent(fpsCounter);
 	scene.Add(GameObjFps);
+	*/
+	//ControllerInit(scene); //, GameObjBackGround.get());
 
-	//ControllerInit(scene, GameObjBackGround.get());
+	auto levelObject = std::make_shared<Level>(std::string("../Data/level.txt"));
 
-	//Children
-	GameObjBackGround->AddChild(GameObjLogo.get());
-	GameObjBackGround->AddChild(GameObjFps.get());
-	GameObjBackGround->AddChild(textObj.get());
-	
+	scene.Add(levelObject);
 
+	//auto pWall = std::make_shared<dae::GameObject>();
+	//auto Texture = std::make_shared<dae::TextureComponent>(pWall.get());
+
+	//Texture->SetTexture("UnbreakableWall.png");
+
+	//pWall->AddComponent(Texture);
+	//pWall->SetRelativePosition(glm::vec3{ 0, 60, 0 });
+
+	//scene.Add(pWall);
 }
 
 int main(int, char* [])
