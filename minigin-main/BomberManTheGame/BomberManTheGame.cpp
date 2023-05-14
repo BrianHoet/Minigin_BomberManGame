@@ -26,7 +26,7 @@
 #include "Level.h"
 
 
-void ControllerInit(dae::Scene& scene /*, dae::GameObject* parent*/)
+void ControllerInit(dae::Scene& scene)
 {
 	const float speed{ 100.f };
 	//Player 1
@@ -53,21 +53,21 @@ void ControllerInit(dae::Scene& scene /*, dae::GameObject* parent*/)
 		dae::InputManager::GetInstance().BindKeyToCommand(SDL_SCANCODE_D, moveCommandRight);
 		
 		
-		auto pHealth = std::make_shared<dae::HealthComponent>(GameObjBomberManTex.get(), 3);
-		GameObjBomberManTex->AddComponent(pHealth);
+		//auto pHealth = std::make_shared<dae::HealthComponent>(GameObjBomberManTex.get(), 3);
+		//GameObjBomberManTex->AddComponent(pHealth);
 		
-		auto pPoints = std::make_shared<dae::PointsComponent>(GameObjBomberManTex.get(), 0);
-		GameObjBomberManTex->AddComponent(pPoints);
+		//auto pPoints = std::make_shared<dae::PointsComponent>(GameObjBomberManTex.get(), 0);
+		//GameObjBomberManTex->AddComponent(pPoints);
 		
-		dae::HealthCommand* dieCommand = new dae::HealthCommand{ GameObjBomberManTex.get() };
-		dae::InputManager::GetInstance().BindKeyToCommand(SDL_SCANCODE_O, dieCommand);
-		dae::PointCommand* pointCommand = new dae::PointCommand{ GameObjBomberManTex.get() };
-		dae::InputManager::GetInstance().BindKeyToCommand(SDL_SCANCODE_P, pointCommand);
+		//dae::HealthCommand* dieCommand = new dae::HealthCommand{ GameObjBomberManTex.get() };
+		//dae::InputManager::GetInstance().BindKeyToCommand(SDL_SCANCODE_O, dieCommand);
+		//dae::PointCommand* pointCommand = new dae::PointCommand{ GameObjBomberManTex.get() };
+		//dae::InputManager::GetInstance().BindKeyToCommand(SDL_SCANCODE_P, pointCommand);
 		
-		auto pUIObserver = std::make_shared<dae::UI>();
-		GameObjBomberManTex->MakeObserver(pUIObserver);
+		//auto pUIObserver = std::make_shared<dae::UI>();
+		//GameObjBomberManTex->MakeObserver(pUIObserver);
 		
-		//parent->AddChild(GameObjBomberManTex.get());
+		//scene.Add(GameObjBomberManTex);
 		//
 		scene.Add(GameObjBomberManTex);
 		//
@@ -90,7 +90,6 @@ void ControllerInit(dae::Scene& scene /*, dae::GameObject* parent*/)
 		////parent->AddChild(BomberManPointsObj.get());
 		//scene.Add(BomberManPointsObj);
 		
-		//GameObjBomberManTex->NotifyObservers(dae::Update);
 	}
 	/*
 	//Player 2
@@ -213,19 +212,12 @@ void load()
 	GameObjFps->AddComponent(fpsCounter);
 	scene.Add(GameObjFps);
 	*/
-	//ControllerInit(scene); //, GameObjBackGround.get());
 
 	auto levelObject = std::make_shared<Level>(std::string("../Data/level.txt"));
-
 	scene.Add(levelObject);
 
-	//auto pWall = std::make_shared<dae::GameObject>();
-	//auto Texture = std::make_shared<dae::TextureComponent>(pWall.get());
-
-	//Texture->SetTexture("UnbreakableWall.png");
-
-	//pWall->AddComponent(Texture);
-	//pWall->SetRelativePosition(glm::vec3{ 0, 60, 0 });
+	ControllerInit(scene);
+	
 
 	//scene.Add(pWall);
 }
