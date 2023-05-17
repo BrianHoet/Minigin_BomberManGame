@@ -1,5 +1,5 @@
 #pragma once
-#include <glm/vec3.hpp>
+#include <glm/vec2.hpp>
 #include "GameObject.h"
 
 namespace dae
@@ -20,10 +20,21 @@ namespace dae
     class MoveCommand : public Command
     {
     private:
-        glm::vec3 m_Dir{};
+        glm::vec2 m_Dir{};
     public:
-        MoveCommand(dae::GameObject* owner, const glm::vec3& dir);
+        MoveCommand(dae::GameObject* owner, const glm::vec2& dir);
         virtual void Execute(float deltaTime) override;
+    };
+
+    class PlaceBomb : public Command
+    {
+    private:
+        glm::vec2 m_Pos{};
+        dae::GameObject* m_pBomb{};
+    public:
+        PlaceBomb(dae::GameObject* owner, dae::GameObject* bomb, const glm::vec2& pos);
+        virtual void Execute(float deltaTime) override;
+	    
     };
 
     class HealthCommand : public Command

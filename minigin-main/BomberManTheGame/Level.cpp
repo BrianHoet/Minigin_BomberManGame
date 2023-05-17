@@ -11,6 +11,11 @@ Level::Level(const std::string& file)
 
 }
 
+std::vector<glm::vec2> Level::Getspawnpoints()
+{
+    return m_SpawnPos;
+}
+
 void Level::LevelCreation(const std::string& file)
 {
 
@@ -28,7 +33,7 @@ void Level::LevelCreation(const std::string& file)
         auto pTexture = std::make_shared<dae::TextureComponent>(pBlock.get());
         AddChild(pBlock.get());
         pBlock->AddComponent(pTexture);
-        pBlock->SetRelativePosition({ pos.x, pos.y, 0 });
+        pBlock->SetRelativePosition({ pos.x, pos.y });
         
         pTexture->SetTexture("Path.png");
 
@@ -47,6 +52,7 @@ void Level::LevelCreation(const std::string& file)
             break;
         case 2:
             pTexture->SetTexture("Spawn.png");
+            m_SpawnPos.push_back(glm::vec2{ pos.x, pos.y});
             break;
         case 3:
             //pTexture->SetTexture("Resources/Level/teleport.png");
@@ -60,8 +66,6 @@ void Level::LevelCreation(const std::string& file)
         m_pLevelGameObjects.push_back(std::move(pBlock));
 
         pos.x += size.x;
-
-        std::cout << mapVector[i];
 
         if ((i + 1) % 33 == 0)
         {

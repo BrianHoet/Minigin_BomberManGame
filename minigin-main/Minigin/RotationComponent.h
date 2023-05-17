@@ -21,6 +21,6 @@ namespace dae
 		float m_Radius{};
 		float m_RotationSpeed{};
 		float m_Angle{};
-		glm::vec3 m_OffsetOfTheParent{};
+		glm::vec2 m_OffsetOfTheParent{};
 	};
 }

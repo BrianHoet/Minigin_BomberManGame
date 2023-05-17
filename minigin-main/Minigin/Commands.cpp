@@ -7,7 +7,7 @@ namespace dae
 {
     class HealthComponent;
 
-    MoveCommand::MoveCommand(dae::GameObject* owner, const glm::vec3& dir)
+    MoveCommand::MoveCommand(dae::GameObject* owner, const glm::vec2& dir)
     {
         m_pGameObject = owner;
         m_Dir = dir;
@@ -17,12 +17,26 @@ namespace dae
     {
         if (m_pGameObject->ReturnDeleting()) return;
 
-        glm::vec3 pos = m_pGameObject->GetRelativePosition();
+        glm::vec2 pos = m_pGameObject->GetRelativePosition();
         pos.x += m_Dir.x * deltaTime;
         pos.y += m_Dir.y * deltaTime;
 
         m_pGameObject->SetRelativePosition(pos);
     }
+
+    PlaceBomb::PlaceBomb(dae::GameObject* owner, dae::GameObject* bomb, const glm::vec2& pos)
+    {
+        m_pGameObject = owner;
+        m_pBomb = bomb;
+        m_Pos = pos;
+    }
+
+    void PlaceBomb::Execute(float /*deltaTime*/)
+    {
+        
+    	m_pBomb->SetRelativePosition(m_pGameObject->GetRelativePosition());
+    }
+
 
     HealthCommand::HealthCommand(dae::GameObject* owner)
     {
@@ -55,4 +69,5 @@ namespace dae
             m_pGameObject->NotifyObservers(SCORE_ADDED);
         }
     }
+    
 }

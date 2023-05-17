@@ -101,19 +101,19 @@ namespace dae
 		m_pChildren.erase(std::remove(m_pChildren.begin(), m_pChildren.end(), childGameObject), m_pChildren.end());
 	}
 
-	const glm::vec3& GameObject::GetWorldPosition()
+	const glm::vec2& GameObject::GetWorldPosition()
 	{
 		if (m_dirtyFlag)
 			UpdateWorldPos();
 		return m_WorldTransform;
 	}
 
-	glm::vec3 GameObject::GetRelativePosition() const
+	glm::vec2 GameObject::GetRelativePosition() const
 	{
 		return m_RelativeTransform;
 	}
 
-	void GameObject::SetRelativePosition(glm::vec3 Pos)
+	void GameObject::SetRelativePosition(glm::vec2 Pos)
 	{
 		m_RelativeTransform = Pos;
 

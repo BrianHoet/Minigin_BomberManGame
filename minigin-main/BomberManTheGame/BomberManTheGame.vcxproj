@@ -157,9 +157,11 @@
   <ItemGroup>
     <ClCompile Include="BomberManTheGame.cpp" />
     <ClCompile Include="Level.cpp" />
+    <ClCompile Include="PlayerBomberManPrefab.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Level.h" />
+    <ClInclude Include="PlayerBomberManPrefab.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

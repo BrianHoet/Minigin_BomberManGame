@@ -18,7 +18,7 @@ void dae::RotationComponent::Update(float deltaTime)
 	
 	float posX = m_OffsetOfTheParent.x + m_Radius * cosf(m_Angle);
 	float posY = m_OffsetOfTheParent.y + m_Radius * sinf(m_Angle);
-	m_pOwner->SetRelativePosition(glm::vec3{ posX, posY, 0 });
+	m_pOwner->SetRelativePosition(glm::vec2{ posX, posY });
 
 }
 

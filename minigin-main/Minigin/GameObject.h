@@ -34,7 +34,7 @@ namespace dae
 		}
 		
 		void UpdateWorldPos();
-		const glm::vec3& GetWorldPosition();
+		const glm::vec2& GetWorldPosition();
 
 		GameObject* GetParent();
 		std::vector<GameObject*> GetChildren() const;
@@ -42,8 +42,8 @@ namespace dae
 		void AddChild(GameObject* child);
 		
 
-		glm::vec3 GetRelativePosition() const;
-		void SetRelativePosition(glm::vec3 Pos);
+		glm::vec2 GetRelativePosition() const;
+		void SetRelativePosition(glm::vec2 Pos);
 
 		void FlagIsTrue();
 		std::string GetTag() const;
@@ -64,8 +64,8 @@ namespace dae
 		std::unique_ptr<Subject> m_pSubject;
 
 	private:
-		glm::vec3 m_WorldTransform{};
-		glm::vec3 m_RelativeTransform{};
+		glm::vec2 m_WorldTransform{};
+		glm::vec2 m_RelativeTransform{};
 
 		std::vector<std::shared_ptr<BaseComponent>> m_pComponents{};
 
