@@ -2,15 +2,14 @@
 #include "GameObject.h"
 #include "Scene.h"
 
-class PlayerBomberManPrefab : public dae::GameObject
+class PlayerBomberManPrefab
 {
 
 public:
 
-	PlayerBomberManPrefab(const std::string& Texture, dae::Scene& scene, glm::vec2 PlayerStartPos);
+	PlayerBomberManPrefab(dae::Scene& scene, glm::vec2 PlayerStartPos);
 
-
-	~PlayerBomberManPrefab();
+	~PlayerBomberManPrefab() = default;
 	PlayerBomberManPrefab(const PlayerBomberManPrefab& other) = delete;
 	PlayerBomberManPrefab(PlayerBomberManPrefab&& other) = delete;
 	PlayerBomberManPrefab& operator=(const PlayerBomberManPrefab& other) = delete;

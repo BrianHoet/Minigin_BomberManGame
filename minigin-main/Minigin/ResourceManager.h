@@ -15,6 +15,7 @@ namespace dae
 		std::shared_ptr<Texture2D> LoadTexture(const std::string& file) const;
 		std::shared_ptr<Font> LoadFont(const std::string& file, unsigned int size) const;
 		std::vector<int> ParseMapTxt(const std::string& file) const;
+		std::string ReturnDataPath() { return m_dataPath; }
 	private:
 		friend class Singleton<ResourceManager>;
 		ResourceManager() = default;

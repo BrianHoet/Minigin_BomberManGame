@@ -2,6 +2,8 @@
 #include "InputManager.h"
 #include <map>
 
+#include "ServiceLocator.h"
+
 namespace dae
 {
 	class Transform;
@@ -18,11 +20,10 @@ bool dae::InputManager::ProcessInput(float deltaTime)
         }
         if (e.type == SDL_KEYDOWN) 
         {
-
+            
         }
         if (e.type == SDL_MOUSEBUTTONDOWN) 
         {
-            
         }
         // etc...
     }

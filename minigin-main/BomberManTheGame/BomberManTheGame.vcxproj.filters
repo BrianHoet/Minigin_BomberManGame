@@ -14,9 +14,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Level.cpp">
-      <Filter>Prefab</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerBomberManPrefab.cpp">
       <Filter>Prefab</Filter>
     </ClCompile>
@@ -25,9 +22,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Level.h">
-      <Filter>Prefab</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerBomberManPrefab.h">
       <Filter>Prefab</Filter>
     </ClInclude>

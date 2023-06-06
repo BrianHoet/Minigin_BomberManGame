@@ -6,12 +6,12 @@
 #include "InputManager.h"
 #include <TextureComponent.h>
 
-PlayerBomberManPrefab::PlayerBomberManPrefab(const std::string& Texture, dae::Scene& scene, glm::vec2 PlayerStartPos)
+PlayerBomberManPrefab::PlayerBomberManPrefab(dae::Scene& scene, glm::vec2 PlayerStartPos)
 {
 	auto GameObjBomberManTex = std::make_shared<dae::GameObject>("BomberMan");
 	GameObjBomberManTex->SetRelativePosition(PlayerStartPos);
 	auto TextureCpBomberman = std::make_shared<dae::TextureComponent>(GameObjBomberManTex.get());
-	TextureCpBomberman->SetTexture(Texture);
+	TextureCpBomberman->SetTexture("BomberMan_Running.png");
 	GameObjBomberManTex->AddComponent(TextureCpBomberman);
 
 	dae::MoveCommand* moveCommandUp = new dae::MoveCommand{ GameObjBomberManTex.get(), up };
@@ -27,8 +27,4 @@ PlayerBomberManPrefab::PlayerBomberManPrefab(const std::string& Texture, dae::Sc
 
 
 	scene.Add(GameObjBomberManTex);
-}
-
-PlayerBomberManPrefab::~PlayerBomberManPrefab()
-{
 }

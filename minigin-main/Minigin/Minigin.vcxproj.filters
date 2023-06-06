@@ -28,6 +28,9 @@
     <Filter Include="Input">
       <UniqueIdentifier>{2d1e26c2-07b4-493a-aa59-8a024c0adda9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sound">
+      <UniqueIdentifier>{aae67686-9713-4c82-8e7c-c473f3c85e1f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Singleton.h">
@@ -129,8 +132,14 @@
     <ClInclude Include="EventQueue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SoundSystem.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="ServiceLocator.h">
+      <Filter>Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseSoundSystem.h">
+      <Filter>Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundSystemEffects.h">
+      <Filter>Sound</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -221,8 +230,8 @@
     <ClCompile Include="Commands.cpp">
       <Filter>Input</Filter>
     </ClCompile>
-    <ClCompile Include="SoundSystem.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="SoundSystemEffects.cpp">
+      <Filter>Sound</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

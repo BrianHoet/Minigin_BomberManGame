@@ -5,10 +5,10 @@
 #endif
 #endif
 
+#pragma once
 #include "Minigin.h"
-
 #include <SDL.h>
-#include "SoundSystem.h"
+#include "SoundSystemEffects.h"
 #include "SceneManager.h"
 #include "ResourceManager.h"
 #include "TextComponent.h"
@@ -24,10 +24,10 @@
 #include "InputManager.h"
 #include "UIComponent.h"
 #include "Observer.h"
-#include "Level.h"
 #include "PlayerBomberManPrefab.h"
+#include "Prefabs.h"
+#include "ServiceLocator.h"
 
-std::shared_ptr<Audio> SoundSystemLocator::instance;
 
 void ControllerInit(dae::Scene& scene, glm::vec2 playerstartingPos)
 {
@@ -196,7 +196,6 @@ void load()
 	textObj->AddComponent(to);
 	scene.Add(textObj);
 
-
 	auto GameObjFps = std::make_shared<dae::GameObject>();
 	auto fpsFont = dae::ResourceManager::GetInstance().LoadFont("Lingua.otf", 15);
 	auto fpsCounter = std::make_shared<dae::FPSCounterComponent>("FPS", fpsFont, GameObjFps.get());
@@ -204,19 +203,88 @@ void load()
 	GameObjFps->AddComponent(fpsCounter);
 	scene.Add(GameObjFps);
 	
-	SoundSystemLocator::initialize();
-	std::shared_ptr<Audio> audio = std::make_shared<Audio>();
-	SoundSystemLocator::provide(audio);
+	//SoundSystemLocator::initialize();
+	//std::shared_ptr<Audio> audio = std::make_shared<Audio>();
+	//SoundSystemLocator::provide(audio);
 
-	SoundSystemLocator::getAudio().addSound("BombermanSFX(4).wav");
+	//SoundSystemLocator::getAudio().addSound("BombermanSFX(4).wav");
 
-	auto levelObject = std::make_shared<Level>(std::string("../Data/level.txt"));
-	scene.Add(levelObject);
+	//dae::CreateLevel();
 
-	auto pos = levelObject->Getspawnpoints()[0];
+	//scene.Add(dae::CreateLevel());
 
-	auto Bomberman = std::make_shared<PlayerBomberManPrefab>("BomberMan_Running.png", scene, pos);
+	/*
+	auto LevelObj = std::make_shared<dae::GameObject>();
 
+	constexpr int width{ 640 };
+	constexpr int height{ 480 };
+
+	std::vector<int> mapVector = dae::ResourceManager::GetInstance().ParseMapTxt("../Data/level.txt");
+
+	constexpr glm::vec2 startPos{ (width / 2) - ((33.f / 2.f) * 16), (height / 2) - ((13.f / 2.f) * 16) };
+	glm::vec2 pos{ startPos };
+
+	for (size_t i{}; i < mapVector.size(); ++i)
+	{
+		auto pBlock = std::make_shared<dae::GameObject>();
+		auto pTexture = std::make_shared<dae::TextureComponent>(pBlock.get());
+		// LevelObj->AddChild(pBlock.get());
+		pBlock->AddComponent(pTexture);
+		pBlock->SetRelativePosition({ pos.x, pos.y });
+
+		LevelObj->AddChild(pBlock.get());
+
+		pTexture->SetTexture("Path.png");
+
+		const glm::vec2 size{ pTexture->GetSize() };
+
+		switch (mapVector[i])
+		{
+		case 0:
+			pTexture->SetTexture("UnbreakableWall.png");
+			LevelObj->AddChild(pBlock.get());
+			//pBlock->SetTag("Wall");
+
+			break;
+		case 1:
+			pTexture->SetTexture("Path.png");
+			break;
+		case 2:
+			pTexture->SetTexture("Spawn.png");
+			//m_SpawnPos.push_back(glm::vec2{ pos.x, pos.y });
+			break;
+		case 3:
+			//pTexture->SetTexture("Resources/Level/teleport.png");
+			//pBlock->SetTag("Teleport");
+			//m_pTeleport.push_back(pBlock.get());
+			break;
+		default:
+			LevelObj->AddChild(pBlock.get());
+			break;
+		}
+		//m_pLevelGameObjects.push_back(std::move(pBlock));
+
+		pos.x += size.x;
+
+		if ((i + 1) % 33 == 0)
+		{
+			std::cout << '\n';
+			pos.x = startPos.x;
+			pos.y += size.y;
+		}
+	}
+
+	scene.Add(LevelObj);
+	*/
+
+	//auto pos = levelObject->Getspawnpoints()[0];
+
+	auto Bomberman = std::make_shared<PlayerBomberManPrefab>( scene, glm::vec2{0,0});
+	
+	
+	dae::servicelocator::register_sound_system(std::make_unique<dae::SoundSystemEffects>());
+	dae::servicelocator::get_sound_system().Load(0, "BombermanSFX(4.wav");
+	dae::servicelocator::get_sound_system().play(0, 5.f);
 }
 
 int main(int, char* [])
