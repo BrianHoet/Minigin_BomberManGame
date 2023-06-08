@@ -17,8 +17,7 @@ std::vector<dae::CollisionBoxComponent*> dae::CollisionBoxManager::GetAllWallCol
     std::vector<dae::CollisionBoxComponent*> WallVec{};
     for (const auto& otherBox : m_pCollisonBoxes)
     {
-
-        if(otherBox->GetOwner()->GetTag() == "Wall")
+        if(otherBox && otherBox->GetOwner() && otherBox->GetOwner()->GetTag() == "Wall")
         {
             WallVec.push_back(otherBox);
         }

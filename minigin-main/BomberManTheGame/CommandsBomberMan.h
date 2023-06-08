@@ -2,6 +2,7 @@
 #include "CollisionBoxComponent.h"
 #include "Commands.h"
 #include "CountDownTimer.h"
+#include "LevelPrefab.h"
 
 namespace BMCommands
 {

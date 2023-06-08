@@ -1,5 +1,6 @@
 #pragma once
 #include "GameObject.h"
+#include "LevelPrefab.h"
 #include "Scene.h"
 
 class PlayerBomberManPrefab final

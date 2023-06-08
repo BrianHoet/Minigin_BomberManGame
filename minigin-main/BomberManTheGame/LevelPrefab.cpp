@@ -37,11 +37,12 @@ dae::LevelPrefab::LevelPrefab(dae::Scene& scene)
 			pTexture->SetTexture("UnbreakableWall.png");
 			pBlock->SetTag("Wall");
 			pBlock->AddComponent(Collider);
-			m_WallPositions.push_back(glm::vec2{pos.x, pos.y});
+			//m_WallPositions.push_back(glm::vec2{pos.x, pos.y});
 			break;
 		case 1:
 			pTexture->SetTexture("Path.png");
 			pBlock->SetTag("Path");
+			m_PathPositions.push_back(glm::vec2{ pos.x, pos.y});
 			break;
 		case 2:
 			pTexture->SetTexture("Spawn.png");
@@ -59,14 +60,23 @@ dae::LevelPrefab::LevelPrefab(dae::Scene& scene)
 		}
 		pos.x += size.x;
 
-		;
-		std::cout << grid.first << ", " << grid.second << '\n';
 
 		if ((i + 1) % grid.first == 0)
 		{
 			pos.x = startPos.x;
 			pos.y += size.y;
 		}
+
+		//for(auto Pathblocks : (m_PathPositions.size()/3)*2 )
+		//{
+		//	auto pBlock = std::make_shared<dae::GameObject>();
+		//	auto pTexture = std::make_shared<dae::TextureComponent>(pBlock.get());
+		//
+		//	pBlock->AddComponent(pTexture);
+		//	pBlock->SetRelativePosition({ pos.x, pos.y });
+		//
+		//	pTexture->SetTexture("Path.png");
+		//}
 	}
 }
 
