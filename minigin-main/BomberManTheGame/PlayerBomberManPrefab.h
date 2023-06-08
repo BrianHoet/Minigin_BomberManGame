@@ -2,12 +2,11 @@
 #include "GameObject.h"
 #include "Scene.h"
 
-class PlayerBomberManPrefab
+class PlayerBomberManPrefab final
 {
-
 public:
 
-	PlayerBomberManPrefab(dae::Scene& scene, glm::vec2 PlayerStartPos);
+	PlayerBomberManPrefab(dae::Scene& scene, glm::vec2 PlayerStartPos, std::shared_ptr<dae::GameObject> Bomb);
 
 	~PlayerBomberManPrefab() = default;
 	PlayerBomberManPrefab(const PlayerBomberManPrefab& other) = delete;

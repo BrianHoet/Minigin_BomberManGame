@@ -35,9 +35,10 @@ std::shared_ptr<dae::Font> dae::ResourceManager::LoadFont(const std::string& fil
 	return std::make_shared<Font>(m_dataPath + file, size);
 }
 
-std::vector<int> dae::ResourceManager::ParseMapTxt(const std::string& file) const
+std::vector<int> dae::ResourceManager::ParseMapTxt(const std::string& file)
 {
     std::vector<int> result;
+    std::pair<int, int> grid;
 
     // Open the file for reading
     std::ifstream fileParsing(file);
@@ -60,6 +61,7 @@ std::vector<int> dae::ResourceManager::ParseMapTxt(const std::string& file) cons
             try
             {
                 result.push_back(std::stoi(field));
+                grid.first++;
             }
             catch (std::invalid_argument&)
             {
@@ -67,8 +69,10 @@ std::vector<int> dae::ResourceManager::ParseMapTxt(const std::string& file) cons
                 std::cout << "Invalid data in file\n";
             }
         }
+        grid.second++;
     }
-
+    auto newColums = grid.first / grid.second;
+    m_Grid = std::make_pair(newColums, grid.second);
 
     return result;
 }

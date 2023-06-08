@@ -25,7 +25,11 @@ namespace dae
 		TextureComponent& operator=(TextureComponent&& other) = delete;
 		glm::vec2 GetSize();
 
+		void SetMustRender(bool render);
+		bool GetMustRender() const;
+
 	private:
 		std::shared_ptr<dae::Texture2D> m_Texture{};
+		bool m_MustTexture{ true };
 	};
 }

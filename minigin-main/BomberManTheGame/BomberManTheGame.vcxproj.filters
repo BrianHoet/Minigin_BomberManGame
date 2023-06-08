@@ -12,6 +12,9 @@
     <Filter Include="Prefab">
       <UniqueIdentifier>{a590457b-fae6-4ce5-8250-46a4212d6b13}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components">
+      <UniqueIdentifier>{82877251-46bf-4bcb-92f1-0c6ba83f24cc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayerBomberManPrefab.cpp">
@@ -20,9 +23,27 @@
     <ClCompile Include="BomberManTheGame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CommandsBomberMan.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CountDownTimer.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelPrefab.cpp">
+      <Filter>Prefab</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlayerBomberManPrefab.h">
+      <Filter>Prefab</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandsBomberMan.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CountDownTimer.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelPrefab.h">
       <Filter>Prefab</Filter>
     </ClInclude>
   </ItemGroup>

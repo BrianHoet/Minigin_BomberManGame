@@ -12,7 +12,8 @@ void dae::SoundSystemEffects::play(const dae::sound_id id, const float volume)
 {
 	auto playchunk = m_Sound.at(id);
 
-	assert(playchunk == nullptr);
+	if(playchunk == nullptr)
+		return;
 	
 	auto channel = Mix_PlayChannel(-1, playchunk, 0);
 	Mix_Volume(channel, static_cast<int>(volume));

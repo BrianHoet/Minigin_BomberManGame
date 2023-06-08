@@ -19,6 +19,7 @@ namespace dae
 
 		void AddComponent(std::shared_ptr<BaseComponent> component);
 		void RemoveComponent(std::shared_ptr<BaseComponent> component);
+		
 
 		template <typename T>
 		T* GetComponent()
@@ -47,6 +48,7 @@ namespace dae
 
 		void FlagIsTrue();
 		std::string GetTag() const;
+		void SetTag(const std::string& tag);
 
 		void MarkTrueForDeleting();
 		bool ReturnDeleting();

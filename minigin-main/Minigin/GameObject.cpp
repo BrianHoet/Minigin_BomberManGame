@@ -13,7 +13,7 @@ namespace dae
 			pComponent->Update(deltaTime);
 		}
 
-		for (auto child : m_pChildren)
+		for (const auto& child : m_pChildren)
 		{
 			child->Update(deltaTime);
 		}
@@ -26,7 +26,7 @@ namespace dae
 			pComponent->FixedUpdate(deltaTime);
 		}
 
-		for (auto child : m_pChildren)
+		for (const auto& child : m_pChildren)
 		{
 			child->FixedUpdate(deltaTime);
 		}
@@ -39,7 +39,7 @@ namespace dae
 			pComponent->Render();
 		}
 
-		for(auto child : m_pChildren)
+		for(const auto& child : m_pChildren)
 		{
 			child->Render();
 		}
@@ -136,7 +136,12 @@ namespace dae
 
 	std::string GameObject::GetTag() const
 	{
-		return std::string();
+		return m_TagString;
+	}
+
+	void GameObject::SetTag(const std::string& tag)
+	{
+		m_TagString = tag;
 	}
 
 	void GameObject::MarkTrueForDeleting()

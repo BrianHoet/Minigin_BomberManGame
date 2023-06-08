@@ -26,16 +26,6 @@ namespace dae
         virtual void Execute(float deltaTime) override;
     };
 
-    class PlaceBomb : public Command
-    {
-    private:
-        glm::vec2 m_Pos{};
-        dae::GameObject* m_pBomb{};
-    public:
-        PlaceBomb(dae::GameObject* owner, dae::GameObject* bomb, const glm::vec2& pos);
-        virtual void Execute(float deltaTime) override;
-	    
-    };
 
     class HealthCommand : public Command
     {

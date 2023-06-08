@@ -141,6 +141,12 @@
     <ClInclude Include="SoundSystemEffects.h">
       <Filter>Sound</Filter>
     </ClInclude>
+    <ClInclude Include="CollisionBoxComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionBoxManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Renderer.cpp">
@@ -232,6 +238,12 @@
     </ClCompile>
     <ClCompile Include="SoundSystemEffects.cpp">
       <Filter>Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionBoxComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionBoxManager.cpp">
+      <Filter>Managers</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

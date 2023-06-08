@@ -6,7 +6,9 @@
 #include "InputManager.h"
 #include <TextureComponent.h>
 
-PlayerBomberManPrefab::PlayerBomberManPrefab(dae::Scene& scene, glm::vec2 PlayerStartPos)
+#include "CommandsBomberMan.h"
+
+PlayerBomberManPrefab::PlayerBomberManPrefab(dae::Scene& scene, glm::vec2 PlayerStartPos, std::shared_ptr<dae::GameObject> Bomb)
 {
 	auto GameObjBomberManTex = std::make_shared<dae::GameObject>("BomberMan");
 	GameObjBomberManTex->SetRelativePosition(PlayerStartPos);
@@ -14,17 +16,24 @@ PlayerBomberManPrefab::PlayerBomberManPrefab(dae::Scene& scene, glm::vec2 Player
 	TextureCpBomberman->SetTexture("BomberMan_Running.png");
 	GameObjBomberManTex->AddComponent(TextureCpBomberman);
 
-	dae::MoveCommand* moveCommandUp = new dae::MoveCommand{ GameObjBomberManTex.get(), up };
-	dae::MoveCommand* moveCommandDown = new dae::MoveCommand{ GameObjBomberManTex.get(), down };
-	dae::MoveCommand* moveCommandLeft = new dae::MoveCommand{ GameObjBomberManTex.get(), left };
-	dae::MoveCommand* moveCommandRight = new dae::MoveCommand{ GameObjBomberManTex.get(), right };
-	//dae::PlaceBomb* PlaceBombCommand = new dae::PlaceBomb{ GameObjBomberManTex.get(), GameObjBomb.get() ,glm::vec3{0,0,0} };
+	//Counter
+	auto CounterComp = std::make_shared<CountDownTimer>(GameObjBomberManTex.get() ,3.f);
+	GameObjBomberManTex->AddComponent(CounterComp);
+
+	//Movement
+	BMCommands::BMMovement* moveCommandUp = new BMCommands::BMMovement{ GameObjBomberManTex.get(), up };
+	BMCommands::BMMovement* moveCommandDown = new BMCommands::BMMovement{ GameObjBomberManTex.get(), down };
+	BMCommands::BMMovement* moveCommandLeft = new BMCommands::BMMovement{ GameObjBomberManTex.get(), left };
+	BMCommands::BMMovement* moveCommandRight = new BMCommands::BMMovement{ GameObjBomberManTex.get(), right };
+
+	
+	BMCommands::BMPlaceBomb* PlaceBombCommand = new BMCommands::BMPlaceBomb{ GameObjBomberManTex.get(), Bomb.get() , CounterComp};
 
 	dae::InputManager::GetInstance().BindKeyToCommand(SDL_SCANCODE_W, moveCommandUp);
 	dae::InputManager::GetInstance().BindKeyToCommand(SDL_SCANCODE_S, moveCommandDown);
 	dae::InputManager::GetInstance().BindKeyToCommand(SDL_SCANCODE_A, moveCommandLeft);
 	dae::InputManager::GetInstance().BindKeyToCommand(SDL_SCANCODE_D, moveCommandRight);
-
+	dae::InputManager::GetInstance().BindKeyToCommand(SDL_SCANCODE_X, PlaceBombCommand);
 
 	scene.Add(GameObjBomberManTex);
 }

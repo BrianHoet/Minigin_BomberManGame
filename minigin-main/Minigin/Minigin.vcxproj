@@ -213,6 +213,8 @@ xcopy $(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\SDL2_ttf.dll $(Outpu
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="BaseComponent.h" />
+    <ClInclude Include="CollisionBoxComponent.h" />
+    <ClInclude Include="CollisionBoxManager.h" />
     <ClInclude Include="Commands.h" />
     <ClInclude Include="Counter.h" />
     <ClInclude Include="Event.h" />
@@ -251,6 +253,8 @@ xcopy $(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\SDL2_ttf.dll $(Outpu
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BaseComponent.cpp" />
+    <ClCompile Include="CollisionBoxComponent.cpp" />
+    <ClCompile Include="CollisionBoxManager.cpp" />
     <ClCompile Include="Commands.cpp" />
     <ClCompile Include="Counter.cpp" />
     <ClCompile Include="Font.cpp" />

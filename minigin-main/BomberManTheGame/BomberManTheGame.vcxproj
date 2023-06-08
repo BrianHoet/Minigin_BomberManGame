@@ -156,9 +156,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BomberManTheGame.cpp" />
+    <ClCompile Include="CommandsBomberMan.cpp" />
+    <ClCompile Include="CountDownTimer.cpp" />
+    <ClCompile Include="LevelPrefab.cpp" />
     <ClCompile Include="PlayerBomberManPrefab.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CommandsBomberMan.h" />
+    <ClInclude Include="CountDownTimer.h" />
+    <ClInclude Include="LevelPrefab.h" />
     <ClInclude Include="PlayerBomberManPrefab.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

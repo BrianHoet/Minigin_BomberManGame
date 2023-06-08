@@ -11,6 +11,7 @@ namespace dae
 	{
 	public:
 		Scene& CreateScene(const std::string& name);
+		Scene& GetScene(int SceneIndex) const;
 
 		void Update(float deltaTime);
 		void FixedUpdate(float deltaTime);
