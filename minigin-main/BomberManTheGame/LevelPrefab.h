@@ -18,9 +18,11 @@ namespace dae
 		LevelPrefab& operator=(LevelPrefab&& other) = delete;
 
 		std::vector<glm::vec2> GetSpawnPosition() const;
+		std::vector<glm::vec2> GetWallPositions() const;
 
 	private:
 		std::vector<glm::vec2> m_SpawnPositions{};
+		std::vector<glm::vec2> m_WallPositions{};
 	};
 
 }

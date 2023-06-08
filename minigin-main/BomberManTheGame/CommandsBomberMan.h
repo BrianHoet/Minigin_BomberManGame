@@ -1,4 +1,5 @@
 #pragma once
+#include "CollisionBoxComponent.h"
 #include "Commands.h"
 #include "CountDownTimer.h"
 
@@ -9,6 +10,7 @@ namespace BMCommands
 	{
 	private:
 		glm::vec2 m_Dir{};
+		dae::CollisionBoxComponent* m_pCollision;
 	public:
 		BMMovement(dae::GameObject* owner, const glm::vec2& dir);
 		virtual void Execute(float deltaTime) override;

@@ -20,7 +20,10 @@ namespace dae
 		void AddCollisionBox(CollisionBoxComponent* box);
 		void RemoveCollisionBox(CollisionBoxComponent* box);
 
+		std::vector<CollisionBoxComponent*> GetAllWallColliders() const;
+
 		bool CheckForCollision(CollisionBoxComponent* box);
+		CollisionBoxComponent* CheckForCollisionComponent(CollisionBoxComponent* box);
 
 	private:
 		std::vector<CollisionBoxComponent*> m_pCollisonBoxes;

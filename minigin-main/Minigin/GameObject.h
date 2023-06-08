@@ -43,8 +43,9 @@ namespace dae
 		void AddChild(GameObject* child);
 		
 
-		glm::vec2 GetRelativePosition() const;
+		glm::vec2 GetRelativePosition() const;	
 		void SetRelativePosition(glm::vec2 Pos);
+		void SetRelativePosition(float Posx, float Posy);
 
 		void FlagIsTrue();
 		std::string GetTag() const;

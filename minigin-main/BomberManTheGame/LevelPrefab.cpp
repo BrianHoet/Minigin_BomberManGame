@@ -1,4 +1,6 @@
 #include "LevelPrefab.h"
+
+#include "CollisionBoxComponent.h"
 #include "ResourceManager.h"
 #include "TextureComponent.h"
 
@@ -16,11 +18,14 @@ dae::LevelPrefab::LevelPrefab(dae::Scene& scene)
 	{
 		auto pBlock = std::make_shared<dae::GameObject>();
 		auto pTexture = std::make_shared<dae::TextureComponent>(pBlock.get());
+		
 
 		pBlock->AddComponent(pTexture);
 		pBlock->SetRelativePosition({ pos.x, pos.y });
 
 		pTexture->SetTexture("Path.png");
+
+		auto Collider = std::make_shared<CollisionBoxComponent>(pBlock.get());
 
 		scene.Add(pBlock);
 
@@ -31,12 +36,16 @@ dae::LevelPrefab::LevelPrefab(dae::Scene& scene)
 		case 0:
 			pTexture->SetTexture("UnbreakableWall.png");
 			pBlock->SetTag("Wall");
+			pBlock->AddComponent(Collider);
+			m_WallPositions.push_back(glm::vec2{pos.x, pos.y});
 			break;
 		case 1:
 			pTexture->SetTexture("Path.png");
+			pBlock->SetTag("Path");
 			break;
 		case 2:
 			pTexture->SetTexture("Spawn.png");
+			pBlock->SetTag("Spawn");
 			m_SpawnPositions.push_back(glm::vec2{ pos.x, pos.y });
 			break;
 			//case 3:
@@ -64,4 +73,9 @@ dae::LevelPrefab::LevelPrefab(dae::Scene& scene)
 std::vector<glm::vec2> dae::LevelPrefab::GetSpawnPosition() const
 {
 	return m_SpawnPositions;
+}
+
+std::vector<glm::vec2> dae::LevelPrefab::GetWallPositions() const
+{
+	return m_WallPositions;
 }

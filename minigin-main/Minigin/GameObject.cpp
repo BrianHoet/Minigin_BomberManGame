@@ -125,6 +125,19 @@ namespace dae
 		FlagIsTrue();
 	}
 
+	void GameObject::SetRelativePosition(float Posx, float Posy)
+	{
+		m_RelativeTransform.x = Posx;
+		m_RelativeTransform.y = Posy;
+
+		if (m_pParent == nullptr)
+		{
+			m_WorldTransform = m_RelativeTransform;
+		}
+
+		FlagIsTrue();
+	}
+
 	void GameObject::FlagIsTrue()
 	{
 		m_dirtyFlag = true;

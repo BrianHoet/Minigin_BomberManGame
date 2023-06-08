@@ -10,12 +10,12 @@
 namespace dae
 {
 
-	class CollisionBoxComponent : public dae::BaseComponent
+	class CollisionBoxComponent : public BaseComponent
 	{
 	public:
 
-		CollisionBoxComponent(dae::GameObject* owner);
-		virtual ~CollisionBoxComponent();
+		CollisionBoxComponent(GameObject* owner);
+		virtual ~CollisionBoxComponent() = default;
 		CollisionBoxComponent(const CollisionBoxComponent& other) = delete;
 		CollisionBoxComponent(CollisionBoxComponent&& other) = delete;
 		CollisionBoxComponent& operator=(const CollisionBoxComponent& other) = delete;
@@ -24,12 +24,11 @@ namespace dae
 		virtual void Update(float) override;
 		virtual void Render() const override;
 		SDL_Rect GetCollisionRect() const;
-		
+
+		GameObject* GetOwner() const;
 
 	private:
 		SDL_Rect m_CollisionBox;
-		Transform* m_pTransform;
-		TextureComponent* m_pTexture;
 	};
 
 }
