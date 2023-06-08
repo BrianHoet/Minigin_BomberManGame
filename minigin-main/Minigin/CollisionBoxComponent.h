@@ -27,8 +27,12 @@ namespace dae
 
 		GameObject* GetOwner() const;
 
+		bool GetRenderCollisionBox() const { return m_RenderCollisionBox; }
+		void SetRenderCollisionBox(bool RenderCollisionBox) { m_RenderCollisionBox = RenderCollisionBox; }
+
 	private:
 		SDL_Rect m_CollisionBox;
+		bool m_RenderCollisionBox = false;
 	};
 
 }

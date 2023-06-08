@@ -66,9 +66,6 @@ dae::LevelPrefab::LevelPrefab(dae::Scene& scene)
 			pos.x = startPos.x;
 			pos.y += size.y;
 		}
-
-		// Debug statements
-		std::cout << "Path Positions Size: " << m_PathPositions.size() << std::endl;
 	}
 }
 
@@ -84,29 +81,72 @@ void dae::LevelPrefab::AddRandomBreakableBlocks(dae::Scene& scene)
 		// Calculate half of the vector size
 		size_t halfSize = m_PathPositions.size() / 2;
 
-		// Randomly select an index within the first half of the vector
+		// Get the number of blocks to add (half the size of m_PathPositions)
+		size_t numBlocksToAdd = halfSize;
+
+		// Randomly select path positions and add blocks
 		std::random_device rd;
 		std::mt19937 gen(rd());
-		std::uniform_int_distribution<size_t> dist(0, halfSize - 1);
-		size_t randomIndex = dist(gen);
+		std::uniform_int_distribution<size_t> dist(0, m_PathPositions.size() - 1);
 
-		// Get the position from the selected index
-		glm::vec2 randomPathPosition = m_PathPositions[randomIndex];
+		std::vector<bool> selectedPositions(m_PathPositions.size(), false); // Keep track of selected positions
 
-		// Create the block on top of the randomly selected path position
-		auto pBreakBlock = std::make_shared<dae::GameObject>();
-		auto pBreakTexture = std::make_shared<dae::TextureComponent>(pBreakBlock.get());
+		for (size_t i = 0; i < numBlocksToAdd; ++i)
+		{
+			// Find a random unselected position within the vector
+			size_t randomIndex = dist(gen);
+			while (selectedPositions[randomIndex])
+			{
+				randomIndex = dist(gen);
+			}
 
-		pBreakBlock->AddComponent(pBreakTexture);
-		pBreakBlock->SetRelativePosition({ randomPathPosition.x, randomPathPosition.y - 16.f }); // Position it above the path block
+			// Mark the position as selected
+			selectedPositions[randomIndex] = true;
 
-		pBreakTexture->SetTexture("BreakableWall.png"); // Replace "BlockTexture.png" with the actual texture for the block
+			// Get the position from the selected index
+			glm::vec2 randomPathPosition = m_PathPositions[randomIndex];
 
-		scene.Add(pBreakBlock);
+			// Check if the random path position is near any spawn position
+			bool isNearSpawnPosition = false;
+			const float distanceThreshold = 16.f; // Adjust the threshold as needed
+
+			for (const auto& spawnPos : m_SpawnPositions)
+			{
+				// Check if the random path position is within a certain distance of any spawn position
+				if (glm::distance(randomPathPosition, spawnPos) <= distanceThreshold)
+				{
+					isNearSpawnPosition = true;
+					break;
+				}
+			}
+
+			// Skip this iteration if the random path position is near any spawn position
+			if (isNearSpawnPosition)
+				continue;
+
+			// Create the block on top of the randomly selected path position
+			auto pBreakBlock = std::make_shared<dae::GameObject>();
+			pBreakBlock->SetTag("Breakable");
+
+			//Texture
+			auto pBreakTexture = std::make_shared<dae::TextureComponent>(pBreakBlock.get());
+			pBreakBlock->AddComponent(pBreakTexture);
+			pBreakTexture->SetTexture("BreakableWall.png"); // Replace "BlockTexture.png" with the actual texture for the block
+
+			//Collision
+			auto pBreakCollider = std::make_shared<dae::CollisionBoxComponent>(pBreakBlock.get());
+			pBreakBlock->AddComponent(pBreakCollider);
+
+			//Pos
+			pBreakBlock->SetRelativePosition({ randomPathPosition.x, randomPathPosition.y }); // Position it above the path block
+
+			scene.Add(pBreakBlock);
+		}
 	}
 	else
 	{
 		// Handle the case when there are no path positions available
 		std::cout << "No path positions available." << std::endl;
 	}
+
 }

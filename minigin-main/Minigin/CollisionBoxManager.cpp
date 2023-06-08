@@ -20,7 +20,7 @@ std::vector<dae::CollisionBoxComponent*> dae::CollisionBoxManager::GetAllWallCol
     {
 	    for (const auto& otherbox : m_pCollisonBoxes)
 	    {
-            if (Owners->GetTag() == "Wall")
+            if (Owners->GetTag() == "Wall" || Owners->GetTag() == "Breakable")
             {
                 WallVec.push_back(otherbox);
             }

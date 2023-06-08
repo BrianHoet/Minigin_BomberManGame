@@ -23,6 +23,7 @@ void dae::CollisionBoxComponent::Update(float)
 
 void dae::CollisionBoxComponent::Render() const
 {
+	if(m_RenderCollisionBox)
 	SDL_RenderDrawRect(Renderer::GetInstance().GetSDLRenderer() ,&m_CollisionBox);
 }
 
