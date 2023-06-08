@@ -10,7 +10,7 @@ dae::CollisionBoxComponent::CollisionBoxComponent(dae::GameObject* owner)
 	m_CollisionBox.w = static_cast<int>(m_pOwner->GetComponent<TextureComponent>()->GetSize().x);
 	m_CollisionBox.h = static_cast<int>(m_pOwner->GetComponent<TextureComponent>()->GetSize().y);
 
-	CollisionBoxManager::GetInstance().AddCollisionBox(this);
+	CollisionBoxManager::GetInstance().AddCollisionBox(m_pOwner, this);
 }
 
 void dae::CollisionBoxComponent::Update(float)

@@ -17,7 +17,7 @@ namespace dae
 		CollisionBoxManager& operator=(const CollisionBoxManager& other) = delete;
 		CollisionBoxManager& operator=(CollisionBoxManager&& other) = delete;
 
-		void AddCollisionBox(CollisionBoxComponent* box);
+		void AddCollisionBox(dae::GameObject* owner, CollisionBoxComponent* box);
 		void RemoveCollisionBox(CollisionBoxComponent* box);
 
 		std::vector<CollisionBoxComponent*> GetAllWallColliders() const;
@@ -27,6 +27,7 @@ namespace dae
 
 	private:
 		std::vector<CollisionBoxComponent*> m_pCollisonBoxes;
+		std::vector<dae::GameObject*> m_pOwners;
 	};
 
 }

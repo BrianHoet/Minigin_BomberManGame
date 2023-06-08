@@ -3,6 +3,7 @@
 #include "CollisionBoxComponent.h"
 #include "ResourceManager.h"
 #include "TextureComponent.h"
+#include <random>
 
 dae::LevelPrefab::LevelPrefab(dae::Scene& scene)
 {
@@ -37,7 +38,6 @@ dae::LevelPrefab::LevelPrefab(dae::Scene& scene)
 			pTexture->SetTexture("UnbreakableWall.png");
 			pBlock->SetTag("Wall");
 			pBlock->AddComponent(Collider);
-			//m_WallPositions.push_back(glm::vec2{pos.x, pos.y});
 			break;
 		case 1:
 			pTexture->SetTexture("Path.png");
@@ -67,16 +67,8 @@ dae::LevelPrefab::LevelPrefab(dae::Scene& scene)
 			pos.y += size.y;
 		}
 
-		//for(auto Pathblocks : (m_PathPositions.size()/3)*2 )
-		//{
-		//	auto pBlock = std::make_shared<dae::GameObject>();
-		//	auto pTexture = std::make_shared<dae::TextureComponent>(pBlock.get());
-		//
-		//	pBlock->AddComponent(pTexture);
-		//	pBlock->SetRelativePosition({ pos.x, pos.y });
-		//
-		//	pTexture->SetTexture("Path.png");
-		//}
+		// Debug statements
+		std::cout << "Path Positions Size: " << m_PathPositions.size() << std::endl;
 	}
 }
 
@@ -85,7 +77,36 @@ std::vector<glm::vec2> dae::LevelPrefab::GetSpawnPosition() const
 	return m_SpawnPositions;
 }
 
-std::vector<glm::vec2> dae::LevelPrefab::GetWallPositions() const
+void dae::LevelPrefab::AddRandomBreakableBlocks(dae::Scene& scene)
 {
-	return m_WallPositions;
+	if (!m_PathPositions.empty())
+	{
+		// Calculate half of the vector size
+		size_t halfSize = m_PathPositions.size() / 2;
+
+		// Randomly select an index within the first half of the vector
+		std::random_device rd;
+		std::mt19937 gen(rd());
+		std::uniform_int_distribution<size_t> dist(0, halfSize - 1);
+		size_t randomIndex = dist(gen);
+
+		// Get the position from the selected index
+		glm::vec2 randomPathPosition = m_PathPositions[randomIndex];
+
+		// Create the block on top of the randomly selected path position
+		auto pBreakBlock = std::make_shared<dae::GameObject>();
+		auto pBreakTexture = std::make_shared<dae::TextureComponent>(pBreakBlock.get());
+
+		pBreakBlock->AddComponent(pBreakTexture);
+		pBreakBlock->SetRelativePosition({ randomPathPosition.x, randomPathPosition.y - 16.f }); // Position it above the path block
+
+		pBreakTexture->SetTexture("BreakableWall.png"); // Replace "BlockTexture.png" with the actual texture for the block
+
+		scene.Add(pBreakBlock);
+	}
+	else
+	{
+		// Handle the case when there are no path positions available
+		std::cout << "No path positions available." << std::endl;
+	}
 }

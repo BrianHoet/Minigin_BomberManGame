@@ -2,8 +2,9 @@
 
 #include "GameObject.h"
 
-void dae::CollisionBoxManager::AddCollisionBox(CollisionBoxComponent* box)
+void dae::CollisionBoxManager::AddCollisionBox(dae::GameObject* owner, CollisionBoxComponent* box)
 {
+    m_pOwners.push_back(owner);
 	m_pCollisonBoxes.push_back(box);
 }
 
@@ -15,12 +16,15 @@ void dae::CollisionBoxManager::RemoveCollisionBox(CollisionBoxComponent* box)
 std::vector<dae::CollisionBoxComponent*> dae::CollisionBoxManager::GetAllWallColliders() const
 {
     std::vector<dae::CollisionBoxComponent*> WallVec{};
-    for (const auto& otherBox : m_pCollisonBoxes)
+    for (const auto& Owners : m_pOwners)
     {
-        if(otherBox && otherBox->GetOwner() && otherBox->GetOwner()->GetTag() == "Wall")
-        {
-            WallVec.push_back(otherBox);
-        }
+	    for (const auto& otherbox : m_pCollisonBoxes)
+	    {
+            if (Owners->GetTag() == "Wall")
+            {
+                WallVec.push_back(otherbox);
+            }
+	    }
     }
 
     return WallVec;

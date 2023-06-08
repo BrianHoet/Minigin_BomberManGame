@@ -192,7 +192,7 @@ void load()
 
 
 	auto Level = std::make_shared<dae::LevelPrefab>(scene);
-
+	Level->AddRandomBreakableBlocks(scene);
 	//Bomb
 	auto GameObjBomb = std::make_shared<dae::GameObject>();
 	GameObjBomb->SetRelativePosition(glm::vec2{-10, -10});
