@@ -25,6 +25,8 @@ namespace dae
 		bool CheckForCollision(CollisionBoxComponent* box);
 		CollisionBoxComponent* CheckForCollisionComponent(CollisionBoxComponent* box);
 
+		bool Raycast(glm::vec2 startpos, glm::vec2 direction, dae::CollisionBoxComponent* collisionbox);
+
 	private:
 		std::vector<CollisionBoxComponent*> m_pCollisonBoxes;
 		std::vector<dae::GameObject*> m_pOwners;

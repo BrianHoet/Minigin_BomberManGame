@@ -15,6 +15,8 @@
 #include "TextureComponent.h"
 #include "Scene.h"
 #include <iostream>
+
+#include "BalloonPrefab.h"
 #include "GameObject.h"
 #include "FPSCounterComponent.h"
 #include "Commands.h"
@@ -201,13 +203,13 @@ void load()
 	GameObjBomb->AddComponent(TextureBomb);
 	scene.Add(GameObjBomb);
 
-	auto Bomberman = std::make_shared<PlayerBomberManPrefab>(scene, Level->GetSpawnPosition()[0], GameObjBomb);
+	auto Bomberman = std::make_shared<dae::PlayerBomberManPrefab>(scene, Level->GetSpawnPosition()[0], GameObjBomb);
 
+	auto Balloon = std::make_shared<dae::BalloonPrefab>(scene, *Level ,glm::vec2{500, 250});
 	
-	
-	dae::servicelocator::register_sound_system(std::make_unique<dae::SoundSystemEffects>());
-	dae::servicelocator::get_sound_system().Load(0, "BombermanSFX(4).wav");
-	dae::servicelocator::get_sound_system().play(0, 5.f);
+	//dae::servicelocator::register_sound_system(std::make_unique<dae::SoundSystemEffects>());
+	//dae::servicelocator::get_sound_system().Load(0, "BombermanSFX(4).wav");
+	//dae::servicelocator::get_sound_system().play(0, 5.f);
 }
 
 int main(int, char* [])

@@ -155,6 +155,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BalloonPrefab.cpp" />
+    <ClCompile Include="BalloonMovementComponent.cpp" />
     <ClCompile Include="BomberManTheGame.cpp" />
     <ClCompile Include="CommandsBomberMan.cpp" />
     <ClCompile Include="CountDownTimer.cpp" />
@@ -162,6 +164,8 @@
     <ClCompile Include="PlayerBomberManPrefab.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BalloonPrefab.h" />
+    <ClInclude Include="BalloonMovementComponent.h" />
     <ClInclude Include="CommandsBomberMan.h" />
     <ClInclude Include="CountDownTimer.h" />
     <ClInclude Include="LevelPrefab.h" />

@@ -16,15 +16,23 @@ void BMCommands::BMMovement::Execute(float deltaTime)
     if (m_pGameObject->ReturnDeleting()) return;
 
     glm::vec2 pos = m_pGameObject->GetRelativePosition();
+
+    if(!dae::CollisionBoxManager::GetInstance().Raycast(m_pGameObject->GetRelativePosition(), m_Dir, m_pCollision))
+    {
+        return;
+    }
+
+    std::cout << m_Dir.x << ", " << m_Dir.y << '\n';
+
+    /*
     glm::vec2 startPos = m_pGameObject->GetRelativePosition();
 	startPos.x += m_pCollision->GetCollisionRect().w / 2.0f;
 	startPos.y += m_pCollision->GetCollisionRect().h / 2.0f;
 
-
     
     glm::vec2 dir = glm::normalize(m_Dir);
-    float distance = 16.0f / 2.f;
-    const float offset{ 1.f };
+    float distance = m_pCollision->GetCollisionRect().w / 2.f;
+    const float offset{ 2.f };
     // Check for collision with obstacles
     for (const auto& boxes : dae::CollisionBoxManager::GetInstance().GetAllWallColliders())
     {
@@ -37,7 +45,7 @@ void BMCommands::BMMovement::Execute(float deltaTime)
             return;
         }
     }
-    
+    */
 
     pos.x += m_Dir.x * deltaTime;
     pos.y += m_Dir.y * deltaTime;

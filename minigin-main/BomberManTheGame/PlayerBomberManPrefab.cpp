@@ -9,7 +9,7 @@
 #include "CollisionBoxComponent.h"
 #include "CommandsBomberMan.h"
 
-PlayerBomberManPrefab::PlayerBomberManPrefab(dae::Scene& scene, glm::vec2 PlayerStartPos, std::shared_ptr<dae::GameObject> Bomb)
+dae::PlayerBomberManPrefab::PlayerBomberManPrefab(dae::Scene& scene, glm::vec2 PlayerStartPos, std::shared_ptr<dae::GameObject> Bomb)
 {
 	auto GameObjBomberManTex = std::make_shared<dae::GameObject>("BomberMan");
 	GameObjBomberManTex->SetRelativePosition(PlayerStartPos);
@@ -19,10 +19,10 @@ PlayerBomberManPrefab::PlayerBomberManPrefab(dae::Scene& scene, glm::vec2 Player
 	TextureCpBomberman->SetTexture("BomberMan_Running.png");
 	GameObjBomberManTex->AddComponent(TextureCpBomberman);
 
-	//transform
-	auto transform = std::make_shared<dae::Transform>(GameObjBomberManTex.get());
-	transform->SetPosition(GameObjBomberManTex->GetWorldPosition().x, GameObjBomberManTex->GetWorldPosition().y);
-	GameObjBomberManTex->AddComponent(transform);
+	////transform
+	//auto transform = std::make_shared<dae::Transform>(GameObjBomberManTex.get());
+	//transform->SetPosition(GameObjBomberManTex->GetWorldPosition().x, GameObjBomberManTex->GetWorldPosition().y);
+	//GameObjBomberManTex->AddComponent(transform);
 
 	//Counter
 	auto CounterComp = std::make_shared<CountDownTimer>(GameObjBomberManTex.get() ,3.f);

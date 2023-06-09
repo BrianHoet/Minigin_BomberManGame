@@ -32,6 +32,12 @@
     <ClCompile Include="LevelPrefab.cpp">
       <Filter>Prefab</Filter>
     </ClCompile>
+    <ClCompile Include="BalloonPrefab.cpp">
+      <Filter>Prefab</Filter>
+    </ClCompile>
+    <ClCompile Include="BalloonMovementComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlayerBomberManPrefab.h">
@@ -45,6 +51,12 @@
     </ClInclude>
     <ClInclude Include="LevelPrefab.h">
       <Filter>Prefab</Filter>
+    </ClInclude>
+    <ClInclude Include="BalloonPrefab.h">
+      <Filter>Prefab</Filter>
+    </ClInclude>
+    <ClInclude Include="BalloonMovementComponent.h">
+      <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

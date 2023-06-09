@@ -136,7 +136,7 @@ void dae::LevelPrefab::AddRandomBreakableBlocks(dae::Scene& scene)
 			//Collision
 			auto pBreakCollider = std::make_shared<dae::CollisionBoxComponent>(pBreakBlock.get());
 			pBreakBlock->AddComponent(pBreakCollider);
-
+			pBreakCollider->SetRenderCollisionBox(true);
 			//Pos
 			pBreakBlock->SetRelativePosition({ randomPathPosition.x, randomPathPosition.y }); // Position it above the path block
 
