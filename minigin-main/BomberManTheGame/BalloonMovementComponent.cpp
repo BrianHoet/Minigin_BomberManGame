@@ -30,6 +30,7 @@ void dae::BalloonMovementComponent::SwitchState()
 		m_Dir = glm::vec2{ -m_Speed,0 };
 		if(!dae::CollisionBoxManager::GetInstance().Raycast(m_pOwner->GetWorldPosition(), m_Dir, m_pOwner->GetComponent<CollisionBoxComponent>()))
 		{
+			std::cout << !dae::CollisionBoxManager::GetInstance().Raycast(m_pOwner->GetWorldPosition(), m_Dir, m_pOwner->GetComponent<CollisionBoxComponent>()) << '\n';
 			m_DirState = MovementDir::Up;
 		}
 		break;
@@ -39,7 +40,6 @@ void dae::BalloonMovementComponent::SwitchState()
 		{
 			m_DirState = MovementDir::Right;
 		}
-		
 		break;
 	case Right:
 		m_Dir = glm::vec2{ m_Speed ,0 };

@@ -69,26 +69,49 @@ dae::CollisionBoxComponent* dae::CollisionBoxManager::CheckForCollisionComponent
     return nullptr;
 }
 
+bool dae::CollisionBoxManager::CheckForOverlapEnemy(CollisionBoxComponent* box)
+{
+    for (const auto& Owners : m_pOwners)
+    {
+        for (const auto& otherbox : m_pCollisonBoxes)
+        {
+            if(Owners->GetTag() == "Enemy")
+            {
+                if (box->GetCollisionRect().x < otherbox->GetCollisionRect().x + otherbox->GetCollisionRect().w &&
+                    box->GetCollisionRect().x + box->GetCollisionRect().w > otherbox->GetCollisionRect().x &&
+                    box->GetCollisionRect().y < otherbox->GetCollisionRect().y + otherbox->GetCollisionRect().h &&
+                    box->GetCollisionRect().y + box->GetCollisionRect().h > otherbox->GetCollisionRect().y)
+                {
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}
+
 bool dae::CollisionBoxManager::Raycast(glm::vec2 startpos, glm::vec2 direction, dae::CollisionBoxComponent* collisionbox)
 {
     glm::vec2 startPos = startpos;
     startPos.x += collisionbox->GetCollisionRect().w / 2.0f;
     startPos.y += collisionbox->GetCollisionRect().h / 2.0f;
 
-
     glm::vec2 dir = glm::normalize(direction);
     float distance = collisionbox->GetCollisionRect().w / 2.f;
-    const float offset{ 2.f };
+    const float offset{ 1.f };
     // Check for collision with obstacles
     for (const auto& boxes : GetAllWallColliders())
     {
-        if (startPos.x + (dir.x * distance + offset) <= boxes->GetCollisionRect().x + boxes->GetCollisionRect().w &&
+        
+         if (startPos.x + (dir.x * distance + offset) <= boxes->GetCollisionRect().x + boxes->GetCollisionRect().w &&
             startPos.x + dir.x * distance - offset >= boxes->GetCollisionRect().x &&
             startPos.y + (dir.y * distance + offset) <= boxes->GetCollisionRect().y + boxes->GetCollisionRect().h &&
             startPos.y + dir.y * distance - offset >= boxes->GetCollisionRect().y)
         {
             return false;
         }
+         
+
     }
     return true;
 }

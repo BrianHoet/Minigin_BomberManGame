@@ -15,15 +15,15 @@
     <Filter Include="Components">
       <UniqueIdentifier>{82877251-46bf-4bcb-92f1-0c6ba83f24cc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Commands">
+      <UniqueIdentifier>{f6e6be23-5011-44fb-86d0-5558c55f44bb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayerBomberManPrefab.cpp">
       <Filter>Prefab</Filter>
     </ClCompile>
     <ClCompile Include="BomberManTheGame.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CommandsBomberMan.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CountDownTimer.cpp">
@@ -38,13 +38,16 @@
     <ClCompile Include="BalloonMovementComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="CommandsBomberMan.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlayerBomberManPrefab.h">
       <Filter>Prefab</Filter>
-    </ClInclude>
-    <ClInclude Include="CommandsBomberMan.h">
-      <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="CountDownTimer.h">
       <Filter>Components</Filter>
@@ -57,6 +60,12 @@
     </ClInclude>
     <ClInclude Include="BalloonMovementComponent.h">
       <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandsBomberMan.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenManager.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

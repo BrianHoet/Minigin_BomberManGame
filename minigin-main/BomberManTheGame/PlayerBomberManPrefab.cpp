@@ -8,16 +8,17 @@
 
 #include "CollisionBoxComponent.h"
 #include "CommandsBomberMan.h"
+#include "Counter.h"
 
 dae::PlayerBomberManPrefab::PlayerBomberManPrefab(dae::Scene& scene, glm::vec2 PlayerStartPos, std::shared_ptr<dae::GameObject> Bomb)
 {
-	auto GameObjBomberManTex = std::make_shared<dae::GameObject>("BomberMan");
-	GameObjBomberManTex->SetRelativePosition(PlayerStartPos);
+	auto GameObjBomberman = std::make_shared<dae::GameObject>("Player_01");
+	GameObjBomberman->SetRelativePosition(PlayerStartPos);
 
 	//Texture
-	auto TextureCpBomberman = std::make_shared<dae::TextureComponent>(GameObjBomberManTex.get());
+	auto TextureCpBomberman = std::make_shared<dae::TextureComponent>(GameObjBomberman.get());
 	TextureCpBomberman->SetTexture("BomberMan_Running.png");
-	GameObjBomberManTex->AddComponent(TextureCpBomberman);
+	GameObjBomberman->AddComponent(TextureCpBomberman);
 
 	////transform
 	//auto transform = std::make_shared<dae::Transform>(GameObjBomberManTex.get());
@@ -25,22 +26,21 @@ dae::PlayerBomberManPrefab::PlayerBomberManPrefab(dae::Scene& scene, glm::vec2 P
 	//GameObjBomberManTex->AddComponent(transform);
 
 	//Counter
-	auto CounterComp = std::make_shared<CountDownTimer>(GameObjBomberManTex.get() ,3.f);
-	GameObjBomberManTex->AddComponent(CounterComp);
+	auto CounterComp = std::make_shared<CountDownTimer>(GameObjBomberman.get() ,3.f);
+	GameObjBomberman->AddComponent(CounterComp);
 
 	//Collision
-	auto Collider = std::make_shared<dae::CollisionBoxComponent>(GameObjBomberManTex.get());
-	GameObjBomberManTex->AddComponent(Collider);
-
+	auto Collider = std::make_shared<dae::CollisionBoxComponent>(GameObjBomberman.get());
+	GameObjBomberman->AddComponent(Collider);
 
 	//Movement
-	BMCommands::BMMovement* moveCommandUp = new BMCommands::BMMovement{ GameObjBomberManTex.get(), up };
-	BMCommands::BMMovement* moveCommandDown = new BMCommands::BMMovement{ GameObjBomberManTex.get(), down };
-	BMCommands::BMMovement* moveCommandLeft = new BMCommands::BMMovement{ GameObjBomberManTex.get(), left };
-	BMCommands::BMMovement* moveCommandRight = new BMCommands::BMMovement{ GameObjBomberManTex.get(), right };
+	BMCommands::BMMovement* moveCommandUp = new BMCommands::BMMovement{ GameObjBomberman.get(), up };
+	BMCommands::BMMovement* moveCommandDown = new BMCommands::BMMovement{ GameObjBomberman.get(), down };
+	BMCommands::BMMovement* moveCommandLeft = new BMCommands::BMMovement{ GameObjBomberman.get(), left };
+	BMCommands::BMMovement* moveCommandRight = new BMCommands::BMMovement{ GameObjBomberman.get(), right };
 
 	
-	BMCommands::BMPlaceBomb* PlaceBombCommand = new BMCommands::BMPlaceBomb{ GameObjBomberManTex.get(), Bomb.get() , CounterComp};
+	BMCommands::BMPlaceBomb* PlaceBombCommand = new BMCommands::BMPlaceBomb{ GameObjBomberman.get(), Bomb.get() , CounterComp};
 
 	dae::InputManager::GetInstance().BindKeyToCommand(SDL_SCANCODE_W, moveCommandUp);
 	dae::InputManager::GetInstance().BindKeyToCommand(SDL_SCANCODE_S, moveCommandDown);
@@ -48,5 +48,5 @@ dae::PlayerBomberManPrefab::PlayerBomberManPrefab(dae::Scene& scene, glm::vec2 P
 	dae::InputManager::GetInstance().BindKeyToCommand(SDL_SCANCODE_D, moveCommandRight);
 	dae::InputManager::GetInstance().BindKeyToCommand(SDL_SCANCODE_X, PlaceBombCommand);
 
-	scene.Add(GameObjBomberManTex);
+	scene.Add(GameObjBomberman);
 }

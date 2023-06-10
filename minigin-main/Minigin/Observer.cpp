@@ -59,8 +59,6 @@ void dae::UI::UpdateUI(dae::GameObject* owner, const std::string& UIType)
 				newValue = std::to_string(points->GetAmount());
 				std::cout << points->GetAmount() << '\n';
 			}
-
-			UnlockAchievements(std::stoi(newValue));
 		}
 
 	}
@@ -69,10 +67,5 @@ void dae::UI::UpdateUI(dae::GameObject* owner, const std::string& UIType)
 	{
 		text->SetText(text->GetBeginText() + newValue);
 	}
-
-}
-
-void dae::UI::UnlockAchievements(int /*points*/)
-{
 
 }

@@ -3,6 +3,8 @@
 #include "Commands.h"
 #include "CountDownTimer.h"
 #include "LevelPrefab.h"
+#include "ScreenManager.h"
+#include "ScreenManager.h"
 
 namespace BMCommands
 {
@@ -27,5 +29,17 @@ namespace BMCommands
 		virtual void Execute(float deltaTime) override;
 
 	};
+
+	class BMPSwitchGame : public dae::Command
+	{
+	private:
+		std::shared_ptr<dae::GameObject> m_pScreen{};
+		dae::ScreenManager* m_pScreenManager;
+	public:
+		BMPSwitchGame(std::shared_ptr<dae::GameObject> owner, dae::ScreenManager* screenmanager);
+		virtual void Execute(float) override;
+
+	};
+
 
 }

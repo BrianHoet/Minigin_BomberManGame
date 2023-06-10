@@ -24,6 +24,7 @@ namespace dae
 
 		bool CheckForCollision(CollisionBoxComponent* box);
 		CollisionBoxComponent* CheckForCollisionComponent(CollisionBoxComponent* box);
+		bool CheckForOverlapEnemy(CollisionBoxComponent* box);
 
 		bool Raycast(glm::vec2 startpos, glm::vec2 direction, dae::CollisionBoxComponent* collisionbox);
 

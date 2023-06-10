@@ -162,6 +162,7 @@
     <ClCompile Include="CountDownTimer.cpp" />
     <ClCompile Include="LevelPrefab.cpp" />
     <ClCompile Include="PlayerBomberManPrefab.cpp" />
+    <ClCompile Include="ScreenManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BalloonPrefab.h" />
@@ -170,6 +171,7 @@
     <ClInclude Include="CountDownTimer.h" />
     <ClInclude Include="LevelPrefab.h" />
     <ClInclude Include="PlayerBomberManPrefab.h" />
+    <ClInclude Include="ScreenManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

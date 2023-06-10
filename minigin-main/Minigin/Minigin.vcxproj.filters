@@ -138,7 +138,7 @@
     <ClInclude Include="BaseSoundSystem.h">
       <Filter>Sound</Filter>
     </ClInclude>
-    <ClInclude Include="SoundSystemEffects.h">
+    <ClInclude Include="SoundSystem.h">
       <Filter>Sound</Filter>
     </ClInclude>
     <ClInclude Include="CollisionBoxComponent.h">
@@ -236,7 +236,7 @@
     <ClCompile Include="Commands.cpp">
       <Filter>Input</Filter>
     </ClCompile>
-    <ClCompile Include="SoundSystemEffects.cpp">
+    <ClCompile Include="SoundSystem.cpp">
       <Filter>Sound</Filter>
     </ClCompile>
     <ClCompile Include="CollisionBoxComponent.cpp">

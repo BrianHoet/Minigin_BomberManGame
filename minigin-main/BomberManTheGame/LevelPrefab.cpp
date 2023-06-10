@@ -5,11 +5,11 @@
 #include "TextureComponent.h"
 #include <random>
 
-dae::LevelPrefab::LevelPrefab(dae::Scene& scene)
+dae::LevelPrefab::LevelPrefab(dae::Scene& scene, const std::string& LevelPath)
 {
 	constexpr int width{ 640 };
 	constexpr int height{ 480 };
-	std::vector<int> mapVector = dae::ResourceManager::GetInstance().ParseMapTxt("../Data/level_02.txt");
+	std::vector<int> mapVector = dae::ResourceManager::GetInstance().ParseMapTxt("../Data/" + LevelPath);
 	auto grid = ResourceManager::GetInstance().ReturnGrid();
 
 	glm::vec2 startPos{ (width / 2) - ((float(grid.first) / 2.f) * 16), (height / 2) - ((float(grid.second)/ 2.f) * 16) };

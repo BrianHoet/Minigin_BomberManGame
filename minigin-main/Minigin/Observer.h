@@ -22,7 +22,6 @@ namespace dae
 
 	private:
 		void UpdateUI(dae::GameObject* owner, const std::string& type);
-		void UnlockAchievements(int points);
 	};
 
 }

@@ -1,8 +1,6 @@
 #include "CommandsBomberMan.h"
 
 #include "CollisionBoxManager.h"
-#include "Renderer.h"
-#include "TextureComponent.h"
 
 BMCommands::BMMovement::BMMovement(dae::GameObject* owner, const glm::vec2& dir)
 {
@@ -22,38 +20,11 @@ void BMCommands::BMMovement::Execute(float deltaTime)
         return;
     }
 
-    std::cout << m_Dir.x << ", " << m_Dir.y << '\n';
-
-    /*
-    glm::vec2 startPos = m_pGameObject->GetRelativePosition();
-	startPos.x += m_pCollision->GetCollisionRect().w / 2.0f;
-	startPos.y += m_pCollision->GetCollisionRect().h / 2.0f;
-
-    
-    glm::vec2 dir = glm::normalize(m_Dir);
-    float distance = m_pCollision->GetCollisionRect().w / 2.f;
-    const float offset{ 2.f };
-    // Check for collision with obstacles
-    for (const auto& boxes : dae::CollisionBoxManager::GetInstance().GetAllWallColliders())
-    {
-    
-        if (startPos.x + (dir.x * distance + offset) <= boxes->GetCollisionRect().x + boxes->GetCollisionRect().w &&
-            startPos.x + dir.x * distance - offset >= boxes->GetCollisionRect().x &&
-            startPos.y + (dir.y * distance + offset) <= boxes->GetCollisionRect().y + boxes->GetCollisionRect().h &&
-            startPos.y + dir.y * distance - offset >= boxes->GetCollisionRect().y)
-        {
-            return;
-        }
-    }
-    */
-
     pos.x += m_Dir.x * deltaTime;
     pos.y += m_Dir.y * deltaTime;
     
     m_pGameObject->SetRelativePosition(pos);
 }
-
-
 
 BMCommands::BMPlaceBomb::BMPlaceBomb(dae::GameObject* owner, dae::GameObject* bomb, std::shared_ptr<CountDownTimer> countdown)
 {
@@ -72,4 +43,17 @@ void BMCommands::BMPlaceBomb::Execute(float /*deltaTime*/)
     }
     
    
+}
+
+
+
+BMCommands::BMPSwitchGame::BMPSwitchGame(std::shared_ptr<dae::GameObject> owner, dae::ScreenManager* screenmanager)
+	:m_pScreen(owner),
+    m_pScreenManager(screenmanager)
+{
+}
+
+void BMCommands::BMPSwitchGame::Execute(float)
+{
+    m_pScreenManager->SwitchScreens();
 }

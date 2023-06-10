@@ -6,10 +6,10 @@
 
 namespace dae
 {
-	class LevelPrefab
+	class LevelPrefab final
 	{
 	public:
-		LevelPrefab(dae::Scene& scene);
+		LevelPrefab(dae::Scene& scene,const std::string& LevelPath);
 
 		~LevelPrefab() = default;
 		LevelPrefab(const LevelPrefab& other) = delete;
