@@ -9,8 +9,7 @@ namespace dae
 	class PlayerBomberManPrefab final
 	{
 	public:
-
-		PlayerBomberManPrefab(dae::Scene& scene, glm::vec2 PlayerStartPos, std::shared_ptr<dae::GameObject> Bomb);
+		PlayerBomberManPrefab(dae::Scene& scene, glm::vec2 PlayerStartPos, std::shared_ptr<dae::GameObject> Bomb, std::shared_ptr<GameObject> background, bool ControllerEnabled);
 
 		~PlayerBomberManPrefab() = default;
 		PlayerBomberManPrefab(const PlayerBomberManPrefab& other) = delete;

@@ -23,9 +23,9 @@ namespace BMCommands
 	{
 	private:
 		dae::GameObject* m_pBomb{};
-		std::shared_ptr<CountDownTimer> m_pcounter;
+		std::shared_ptr<dae::CountDownTimer> m_pcounter;
 	public:
-		BMPlaceBomb(dae::GameObject* owner, dae::GameObject* bomb, std::shared_ptr<CountDownTimer> countdown);
+		BMPlaceBomb(dae::GameObject* owner, dae::GameObject* bomb, std::shared_ptr<dae::CountDownTimer> countdown);
 		virtual void Execute(float deltaTime) override;
 
 	};
@@ -34,11 +34,24 @@ namespace BMCommands
 	{
 	private:
 		std::shared_ptr<dae::GameObject> m_pScreen{};
-		dae::ScreenManager* m_pScreenManager;
+		dae::GameObject* m_pTextMode;
+		dae::ScreenManager* m_pScreenManager{};
+		int m_CurrentScreen;
 	public:
-		BMPSwitchGame(std::shared_ptr<dae::GameObject> owner, dae::ScreenManager* screenmanager);
+		BMPSwitchGame(std::shared_ptr<dae::GameObject> owner, dae::GameObject* text, const int& currentScreen, dae::ScreenManager* screen);
 		virtual void Execute(float) override;
 
+	};
+
+	class AcceptGameMode : public dae::Command
+	{
+	private:
+		std::shared_ptr<dae::GameObject> m_pScreen{};
+		dae::ScreenManager* m_pScreenManager{};
+		bool m_Pressed{ false };
+	public:
+		AcceptGameMode(std::shared_ptr<dae::GameObject> owner, dae::ScreenManager* screen);
+		virtual void Execute(float) override;
 	};
 
 

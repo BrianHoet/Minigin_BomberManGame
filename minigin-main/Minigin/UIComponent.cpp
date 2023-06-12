@@ -19,6 +19,7 @@ UIComponent::UIComponent(std::shared_ptr<Font> font, const std::string& text, co
 	m_Type{ type }
 {
 	m_pOwner = owner;
+	SetText(text);
 }
 
 

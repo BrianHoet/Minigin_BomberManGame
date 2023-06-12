@@ -1,4 +1,5 @@
 #pragma once
+#include "Scene.h"
 #include "Singleton.h"
 #include "TextComponent.h"
 
@@ -27,21 +28,23 @@ namespace dae
 		void CreateCoopScreen();
 		void CreateVersusScreen();
 
-		Screen GetCurrentEnum() const { return m_CurrentScreen; }
+		int GetCurrentEnum() const { return m_CurrentScreen; }
 		void SetCurrentEnum(int enumid)
 		{
 			m_CurrentScreen = static_cast<Screen>(enumid);
 		};
 
-		void SwitchScreens();
+		void CreateAppropriateScene();
+
 
 	private:
 
-		Screen m_CurrentScreen = Screen::SingleScreen;
+		int m_CurrentScreen{ 0 };
 		float m_Width{ 640 };
 		float m_Height{ 480 };
 
 		std::shared_ptr<TextComponent> m_pGameModeDisplayText;
+		std::shared_ptr<GameObject> m_pGameModeDisplay;
 	};
 
 }

@@ -11,6 +11,7 @@ namespace dae
 	{
 	public:
 		Scene& CreateScene(const std::string& name);
+		void RemoveScene(std::shared_ptr<dae::Scene> scene);
 		Scene& GetScene(int SceneIndex) const;
 
 		void Update(float deltaTime);

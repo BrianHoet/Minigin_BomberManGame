@@ -10,11 +10,12 @@ namespace dae
     public:
         virtual ~Command() = default;
         virtual void Execute(float) = 0;
-
+        void SetKeyPressed(bool keyPressed) { m_KeyPressed = keyPressed; }
+        bool GetKeyPressed() const { return m_KeyPressed; }
     protected:
         dae::GameObject* GetGameActor() const { return m_pGameObject; }
         dae::GameObject* m_pGameObject{};
-
+        bool m_KeyPressed = false;
     };
 
     class MoveCommand : public Command

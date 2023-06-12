@@ -143,7 +143,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)Minigin;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <LanguageStandard_C>Default</LanguageStandard_C>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -155,6 +155,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BombComponent.cpp" />
+    <ClCompile Include="PlayerBalloomPrefab.cpp" />
     <ClCompile Include="BalloonPrefab.cpp" />
     <ClCompile Include="BalloonMovementComponent.cpp" />
     <ClCompile Include="BomberManTheGame.cpp" />
@@ -165,6 +167,8 @@
     <ClCompile Include="ScreenManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BombComponent.h" />
+    <ClInclude Include="PlayerBalloomPrefab.h" />
     <ClInclude Include="BalloonPrefab.h" />
     <ClInclude Include="BalloonMovementComponent.h" />
     <ClInclude Include="CommandsBomberMan.h" />

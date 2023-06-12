@@ -36,7 +36,7 @@ namespace dae
 
         if (auto health = m_pGameObject->GetComponent<dae::HealthComponent>())
         {
-            health->SetAmount(0);
+            health->SetAmount(health->GetAmount() - 1);
         }
     }
 

@@ -4,7 +4,7 @@
 
 #include "GameObject.h"
 
-CountDownTimer::CountDownTimer(dae::GameObject* owner,float StartCountDownNumber)
+dae::CountDownTimer::CountDownTimer(dae::GameObject* owner,float StartCountDownNumber)
 	:m_StartCountDownValue(StartCountDownNumber)
 {
 	m_IsDoneCountingDown = false;
@@ -12,7 +12,7 @@ CountDownTimer::CountDownTimer(dae::GameObject* owner,float StartCountDownNumber
 	m_pOwner = owner;
 }
 
-void CountDownTimer::Update(float deltaTime)
+void dae::CountDownTimer::Update(float deltaTime)
 {
 	if(!m_IsDoneCountingDown)
 	{
@@ -26,12 +26,12 @@ void CountDownTimer::Update(float deltaTime)
 	}
 }
 
-void CountDownTimer::SetIsDoneCountingDown(bool CountDownState)
+void dae::CountDownTimer::SetIsDoneCountingDown(bool CountDownState)
 {
 	m_IsDoneCountingDown = CountDownState;
 }
 
-bool CountDownTimer::GetIsDoneCountingDown() const
+bool dae::CountDownTimer::GetIsDoneCountingDown() const
 {
 	return m_IsDoneCountingDown;
 }

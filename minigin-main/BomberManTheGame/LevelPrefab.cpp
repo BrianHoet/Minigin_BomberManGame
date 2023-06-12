@@ -124,6 +124,42 @@ void dae::LevelPrefab::AddRandomBreakableBlocks(dae::Scene& scene)
 			if (isNearSpawnPosition)
 				continue;
 
+			m_BlockPositions.push_back(randomPathPosition);
+
+		}
+		{
+			// Create the door object
+			auto pDoorBlock = std::make_shared<dae::GameObject>();
+			pDoorBlock->SetTag("Door");
+
+			// Texture
+			auto pDoorTexture = std::make_shared<dae::TextureComponent>(pDoorBlock.get());
+			pDoorBlock->AddComponent(pDoorTexture);
+			pDoorTexture->SetTexture("Door.png");
+
+			// Collision
+			auto pDoorCollider = std::make_shared<dae::CollisionBoxComponent>(pDoorBlock.get());
+			pDoorBlock->AddComponent(pDoorCollider);
+			pDoorCollider->SetRenderCollisionBox(true);
+
+			std::random_device rdx;
+			std::mt19937 gen2(rd());
+			std::uniform_int_distribution<size_t> dist2(0, m_BlockPositions.size() - 1);
+
+			// Select a random position from the block positions vector
+			size_t randomIndexDoor = dist2(gen);
+			glm::vec2 doorPosition = m_BlockPositions[randomIndexDoor];
+
+			// Set the door position
+			pDoorBlock->SetRelativePosition(doorPosition);
+			std::cout << doorPosition.x << ", " << doorPosition.y << '\n';
+			// Add the door to the scene
+			scene.Add(pDoorBlock);
+		}
+
+
+		for (int i = 0; i < m_BlockPositions.size(); ++i)
+		{
 			// Create the block on top of the randomly selected path position
 			auto pBreakBlock = std::make_shared<dae::GameObject>();
 			pBreakBlock->SetTag("Breakable");
@@ -131,17 +167,18 @@ void dae::LevelPrefab::AddRandomBreakableBlocks(dae::Scene& scene)
 			//Texture
 			auto pBreakTexture = std::make_shared<dae::TextureComponent>(pBreakBlock.get());
 			pBreakBlock->AddComponent(pBreakTexture);
-			pBreakTexture->SetTexture("BreakableWall.png"); // Replace "BlockTexture.png" with the actual texture for the block
+			pBreakTexture->SetTexture("BreakableWall.png");
 
 			//Collision
 			auto pBreakCollider = std::make_shared<dae::CollisionBoxComponent>(pBreakBlock.get());
 			pBreakBlock->AddComponent(pBreakCollider);
 			pBreakCollider->SetRenderCollisionBox(true);
 			//Pos
-			pBreakBlock->SetRelativePosition({ randomPathPosition.x, randomPathPosition.y }); // Position it above the path block
+			pBreakBlock->SetRelativePosition({ m_BlockPositions[i].x, m_BlockPositions[i].y}); // Position it above the path block
 
 			scene.Add(pBreakBlock);
 		}
+
 	}
 	else
 	{

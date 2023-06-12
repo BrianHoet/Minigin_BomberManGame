@@ -23,6 +23,8 @@ namespace dae
 	private:
 		std::vector<glm::vec2> m_SpawnPositions{};
 		std::vector<glm::vec2> m_PathPositions{};
+		std::vector<glm::vec2> m_BlockPositions{};
+		bool m_PlacedDoor{ false };
 	};
 
 }
